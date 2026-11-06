@@ -1,0 +1,146 @@
+---
+import { render } from 'astro:content';
+import Base from '../../../../layouts/Base.astro';
+import { getLessons, lessonPath, lessonSlug, type Lesson } from '../../../../lib/lessons';
+import { formatDate, formatList, t, tPlural } from '../../../../i18n/ui';
+import type { Level } from '../../../../lib/taxonomy';
+
+export async function getStaticPaths() {
+  const lessons = await getLessons();
+  return lessons.map((lesson) => {
+    const siblings = lessons.filter(
+      (other) =>
+        other.data.lang === lesson.data.lang &&
+        other.data.topic === lesson.data.topic &&
+        other.data.level === lesson.data.level,
+    );
+    const index = siblings.indexOf(lesson);
+    return {
+      params: {
+        lang: lesson.data.lang,
+        topic: lesson.data.topic,
+        level: String(lesson.data.level),
+        slug: lessonSlug(lesson),
+      },
+      props: {
+        lesson,
+        prev: siblings[index - 1],
+        next: siblings[index + 1],
+      },
+    };
+  });
+}
+
+interface Props {
+  lesson: Lesson;
+  prev?: Lesson;
+  next?: Lesson;
+}
+
+const { lesson, prev, next } = Astro.props;
+const { data } = lesson;
+const lang = data.lang;
+const { Content } = await render(lesson);
+const topicName = t(lang, `topic.${data.topic}`);
+const isApproved = data.review.status === 'approved';
+---
+
+<Base lang={lang} title={data.title} description={data.summary}>
+  <article>
+    <p class="mb-2">
+      <a href={`/${lang}/${data.topic}/`}>{t(lang, 'lesson.backToTopic', { topic: topicName })}</a>
+    </p>
+
+    {
+      !isApproved && (
+        <p role="note" class="mb-6 rounded-lg bg-warn-bg text-warn-fg px-4 py-3 font-semibold">
+          {t(lang, 'lesson.draft')}
+        </p>
+      )
+    }
+
+    <header class="mb-8">
+      <p class="text-muted">{t(lang, `level.${data.level as Level}`)}</p>
+      <h1 class="text-3xl font-bold mb-4">{data.title}</h1>
+
+      <div class="rounded-xl bg-brand-soft p-4">
+        <p class="font-semibold">{t(lang, 'lesson.objective')}</p>
+        <p>{data.objective}</p>
+      </div>
+
+      <dl class="mt-4 flex flex-wrap gap-x-8 gap-y-2 text-muted">
+        <div>
+          <dt class="inline">{t(lang, 'lesson.duration')}:</dt>
+          <dd class="inline">{tPlural(lang, 'minutes', data.duration)}</dd>
+        </div>
+        {
+          data.platforms && data.platforms.length > 0 && (
+            <div>
+              <dt class="inline">{t(lang, 'lesson.platforms')}:</dt>
+              <dd class="inline">
+                {formatList(
+                  lang,
+                  data.platforms.map((p) => t(lang, `platform.${p}`)),
+                )}
+              </dd>
+            </div>
+          )
+        }
+      </dl>
+    </header>
+
+    <div class="lesson">
+      <Content />
+    </div>
+
+    <footer class="mt-12 border-t border-border pt-6 text-muted">
+      <section aria-labelledby="sources-heading">
+        <h2 id="sources-heading" class="text-xl font-bold text-fg mb-3">{t(lang, 'lesson.sources')}</h2>
+        <ol class="list-decimal ps-6 flex flex-col gap-2">
+          {
+            data.sources.map((source) => (
+              <li>
+                <a href={source.url} lang={source.lang} rel="noopener">
+                  {source.title}
+                </a>
+                <span> — {source.publisher}. </span>
+                <span class="text-sm">{t(lang, 'lesson.accessed', { date: formatDate(lang, source.accessed) })}</span>
+              </li>
+            ))
+          }
+        </ol>
+      </section>
+
+      <p class="mt-6 text-sm">{t(lang, 'lesson.lastVerified', { date: formatDate(lang, data.lastVerified) })}</p>
+      {
+        data.ai.assisted && isApproved && data.review.reviewer && data.review.date && (
+          <p class="mt-2 text-sm">
+            {t(lang, 'lesson.disclosure', {
+              reviewer: data.review.reviewer,
+              date: formatDate(lang, data.review.date),
+            })}
+          </p>
+        )
+      }
+    </footer>
+
+    <nav class="mt-10 flex flex-wrap justify-between gap-4" aria-label={topicName}>
+      {
+        prev ? (
+          <a href={lessonPath(prev)} rel="prev" class="rounded-lg border border-border px-4 py-2 no-underline">
+            {t(lang, 'lesson.prev')}: {prev.data.title}
+          </a>
+        ) : (
+          <span />
+        )
+      }
+      {
+        next && (
+          <a href={lessonPath(next)} rel="next" class="rounded-lg bg-brand text-brand-fg px-4 py-2 no-underline">
+            {t(lang, 'lesson.next')}: {next.data.title}
+          </a>
+        )
+      }
+    </nav>
+  </article>
+</Base>

@@ -1,0 +1,55 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { LEVELS, LOCALES, TOPICS, type Locale, type Topic } from '../../../lib/taxonomy';
+import { getLessons, lessonPath } from '../../../lib/lessons';
+import { formatNumber, t, tPlural } from '../../../i18n/ui';
+
+export function getStaticPaths() {
+  return LOCALES.flatMap((lang) => TOPICS.map((topic) => ({ params: { lang, topic } })));
+}
+
+const lang = Astro.params.lang as Locale;
+const topic = Astro.params.topic as Topic;
+const lessons = await getLessons({ lang, topic });
+const topicName = t(lang, `topic.${topic}`);
+
+// Level 0 is always listed; higher levels only once they have lessons.
+const levels = LEVELS.filter((level) => level === 0 || lessons.some((lesson) => lesson.data.level === level));
+---
+
+<Base lang={lang} title={topicName}>
+  <p class="mb-2"><a href={`/${lang}/`}>{t(lang, 'nav.home')}</a></p>
+  <h1 class="text-3xl font-bold mb-8">{topicName}</h1>
+
+  {
+    levels.map((level) => {
+      const inLevel = lessons.filter((lesson) => lesson.data.level === level);
+      return (
+        <section class="mb-10" aria-labelledby={`level-${level}`}>
+          <h2 id={`level-${level}`} class="text-2xl font-bold mb-1">
+            {t(lang, `level.${level}`)}
+          </h2>
+          <p class="text-muted mb-4">{t(lang, 'level.label', { n: formatNumber(lang, level) })}</p>
+          {inLevel.length === 0 ? (
+            <p class="text-muted">{t(lang, 'topic.empty')}</p>
+          ) : (
+            <ol class="flex flex-col gap-3">
+              {inLevel.map((lesson) => (
+                <li>
+                  <a
+                    href={lessonPath(lesson)}
+                    class="block rounded-xl border border-border bg-surface p-4 no-underline text-fg hover:border-brand"
+                  >
+                    <span class="block font-semibold text-brand">{lesson.data.title}</span>
+                    <span class="block text-muted">{lesson.data.summary}</span>
+                    <span class="block mt-1 text-sm text-muted">{tPlural(lang, 'minutes', lesson.data.duration)}</span>
+                  </a>
+                </li>
+              ))}
+            </ol>
+          )}
+        </section>
+      );
+    })
+  }
+</Base>

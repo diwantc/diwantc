@@ -1,0 +1,98 @@
+---
+import '@fontsource/ibm-plex-sans-arabic/400.css';
+import '@fontsource/ibm-plex-sans-arabic/600.css';
+import '@fontsource/ibm-plex-sans-arabic/700.css';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/600.css';
+import '@fontsource/ibm-plex-sans/700.css';
+import '../styles/global.css';
+import { DIRECTION, LOCALES, LOCALE_NAMES, type Locale } from '../lib/taxonomy';
+import { t } from '../i18n/ui';
+
+interface Props {
+  lang: Locale;
+  title?: string;
+  description?: string;
+}
+
+const { lang, title, description } = Astro.props;
+const siteName = t(lang, 'site.name');
+const pageTitle = title ? `${title} · ${siteName}` : siteName;
+const pageDescription = description ?? t(lang, 'site.tagline');
+
+// Every page exists in all three languages at the same path after the
+// language prefix, so alternates are a prefix swap.
+const pathAfterLang = Astro.url.pathname.replace(/^\/(ar|en|fr)(?=\/|$)/, '');
+const pathFor = (locale: Locale) => `/${locale}${pathAfterLang || '/'}`;
+const canonical = new URL(pathFor(lang), Astro.site);
+---
+
+<!doctype html>
+<html lang={lang} dir={DIRECTION[lang]}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <link rel="canonical" href={canonical} />
+    {
+      LOCALES.map((locale) => (
+        <link rel="alternate" hreflang={locale} href={new URL(pathFor(locale), Astro.site)} />
+      ))
+    }
+    <link rel="alternate" hreflang="x-default" href={new URL(pathFor('ar'), Astro.site)} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0b5d75" />
+  </head>
+  <body class="min-h-screen flex flex-col">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:start-2 focus:z-50 bg-brand text-brand-fg px-4 py-2 rounded-lg no-underline"
+    >
+      {t(lang, 'nav.skip')}
+    </a>
+
+    <header class="border-b border-border bg-surface">
+      <div class="mx-auto max-w-3xl px-4 py-3 flex flex-wrap items-center justify-between gap-3">
+        <a href={`/${lang}/`} class="text-xl font-bold no-underline text-fg">
+          {siteName}
+        </a>
+        <nav aria-label={t(lang, 'nav.language')}>
+          <ul class="flex gap-1">
+            {
+              LOCALES.map((locale) => (
+                <li>
+                  <a
+                    href={pathFor(locale)}
+                    lang={locale}
+                    hreflang={locale}
+                    aria-current={locale === lang ? 'true' : undefined}
+                    class:list={[
+                      'block px-3 py-1 rounded-lg no-underline text-base',
+                      locale === lang ? 'bg-brand text-brand-fg' : 'text-brand hover:bg-brand-soft',
+                    ]}
+                  >
+                    {LOCALE_NAMES[locale]}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="flex-1 mx-auto w-full max-w-3xl px-4 py-8">
+      <slot />
+    </main>
+
+    <footer class="border-t border-border text-muted text-sm">
+      <div class="mx-auto max-w-3xl px-4 py-6 flex flex-col gap-2">
+        <p>{t(lang, 'footer.license')}</p>
+        <p>
+          <a href="https://github.com/diwantc/diwantc">{t(lang, 'footer.source')}</a>
+        </p>
+      </div>
+    </footer>
+  </body>
+</html>

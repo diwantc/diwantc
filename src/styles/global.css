@@ -1,0 +1,175 @@
+@import 'tailwindcss';
+
+/*
+ * Temporary colors until DiwanTC has a visual identity.
+ * Every text/background pair meets WCAG AA (body text meets AAA).
+ * Change the values here; components only use the tokens.
+ */
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --fg: #1c2125;
+  --muted: #4a545c;
+  --border: #d5dade;
+  --brand: #0b5d75;
+  --brand-fg: #ffffff;
+  --brand-soft: #e6f2f5;
+  --warn-bg: #fff4d6;
+  --warn-fg: #5c4300;
+  color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0f1418;
+    --surface: #161d22;
+    --fg: #e8ecee;
+    --muted: #a9b3ba;
+    --border: #2c363d;
+    --brand: #7cc8de;
+    --brand-fg: #0f1418;
+    --brand-soft: #13303a;
+    --warn-bg: #3a2e05;
+    --warn-fg: #f5dc8f;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-brand: var(--brand);
+  --color-brand-fg: var(--brand-fg);
+  --color-brand-soft: var(--brand-soft);
+  --color-warn-bg: var(--warn-bg);
+  --color-warn-fg: var(--warn-fg);
+  --font-sans: 'IBM Plex Sans Arabic', 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    /* 18px base: easier for older readers. */
+    font-size: 112.5%;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-bg text-fg font-sans antialiased;
+    line-height: 1.75;
+  }
+
+  :lang(ar) body,
+  body:lang(ar) {
+    line-height: 1.9;
+  }
+
+  :lang(en),
+  :lang(fr) {
+    font-family: 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
+  }
+
+  a {
+    @apply text-brand underline underline-offset-4;
+  }
+
+  :focus-visible {
+    outline: 3px solid var(--brand);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Lesson body. Logical properties only, so RTL and LTR both work. */
+@layer components {
+  .lesson > * + * {
+    margin-block-start: 1em;
+  }
+
+  .lesson h2 {
+    @apply text-2xl font-bold;
+    margin-block-start: 2em;
+    padding-block-end: 0.25em;
+    border-block-end: 2px solid var(--border);
+  }
+
+  .lesson h3 {
+    @apply text-xl font-semibold;
+    margin-block-start: 1.5em;
+  }
+
+  .lesson ol,
+  .lesson ul {
+    padding-inline-start: 1.5em;
+  }
+
+  .lesson ol {
+    list-style: decimal;
+  }
+
+  .lesson ul {
+    list-style: disc;
+  }
+
+  .lesson li + li {
+    margin-block-start: 0.4em;
+  }
+
+  .lesson img {
+    max-inline-size: 100%;
+    block-size: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+
+  .lesson details {
+    @apply bg-surface rounded-lg;
+    border: 1px solid var(--border);
+    padding: 0.75em 1em;
+  }
+
+  .lesson summary {
+    @apply text-brand font-semibold;
+    cursor: pointer;
+  }
+
+  .lesson details[open] summary {
+    margin-block-end: 0.5em;
+  }
+
+  .lesson code {
+    @apply bg-brand-soft rounded px-1;
+    font-size: 0.9em;
+    direction: ltr;
+    unicode-bidi: isolate;
+  }
+
+  .lesson pre {
+    @apply bg-surface rounded-lg p-4 overflow-x-auto;
+    border: 1px solid var(--border);
+    direction: ltr;
+    text-align: left;
+  }
+
+  .lesson pre code {
+    background: none;
+    padding: 0;
+  }
+
+  .lesson blockquote {
+    border-inline-start: 4px solid var(--brand);
+    padding-inline-start: 1em;
+    @apply text-muted;
+  }
+}

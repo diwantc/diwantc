@@ -1,0 +1,32 @@
+---
+import '@fontsource/ibm-plex-sans-arabic/400.css';
+import '@fontsource/ibm-plex-sans-arabic/700.css';
+import '@fontsource/ibm-plex-sans/400.css';
+import '@fontsource/ibm-plex-sans/700.css';
+import '../styles/global.css';
+import { DIRECTION, LOCALES } from '../lib/taxonomy';
+import { t } from '../i18n/ui';
+---
+
+<!doctype html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>404 · {t('ar', 'site.name')} · DiwanTC</title>
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+  </head>
+  <body class="min-h-screen flex items-center justify-center p-4">
+    <main class="flex flex-col gap-8 text-center">
+      {
+        LOCALES.map((lang) => (
+          <section lang={lang} dir={DIRECTION[lang]}>
+            <h1 class="text-2xl font-bold">{t(lang, 'notFound.title')}</h1>
+            <a href={`/${lang}/`}>{t(lang, 'notFound.back')}</a>
+          </section>
+        ))
+      }
+    </main>
+  </body>
+</html>
