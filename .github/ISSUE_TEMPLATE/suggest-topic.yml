@@ -1,0 +1,17 @@
+name: Suggest a topic
+description: A subject DiwanTC should teach.
+title: "Topic: "
+labels: ["topic-idea"]
+body:
+  - type: input
+    id: topic
+    attributes:
+      label: Topic
+    validations:
+      required: true
+  - type: textarea
+    id: who
+    attributes:
+      label: Who is it for, and what should they be able to do afterwards?
+    validations:
+      required: true

@@ -1,0 +1,44 @@
+---
+import Base from '../../layouts/Base.astro';
+import { LOCALES, TOPICS, type Locale } from '../../lib/taxonomy';
+import { getLessons } from '../../lib/lessons';
+import { t, tPlural } from '../../i18n/ui';
+
+export function getStaticPaths() {
+  return LOCALES.map((lang) => ({ params: { lang } }));
+}
+
+const lang = Astro.params.lang as Locale;
+const lessons = await getLessons({ lang });
+const countByTopic = Object.fromEntries(
+  TOPICS.map((topic) => [topic, lessons.filter((lesson) => lesson.data.topic === topic).length]),
+);
+---
+
+<Base lang={lang}>
+  <section class="mb-10">
+    <h1 class="text-3xl font-bold mb-3">{t(lang, 'site.tagline')}</h1>
+    <p class="text-lg text-muted">{t(lang, 'site.intro')}</p>
+  </section>
+
+  <section aria-labelledby="topics-heading">
+    <h2 id="topics-heading" class="text-2xl font-bold mb-4">{t(lang, 'home.topics')}</h2>
+    <ul class="grid gap-4 sm:grid-cols-2">
+      {
+        TOPICS.map((topic) => (
+          <li>
+            <a
+              href={`/${lang}/${topic}/`}
+              class="block h-full rounded-xl border border-border bg-surface p-5 no-underline text-fg hover:border-brand"
+            >
+              <span class="block text-lg font-semibold text-brand">{t(lang, `topic.${topic}`)}</span>
+              <span class="block mt-1 text-muted">
+                {countByTopic[topic] > 0 ? tPlural(lang, 'lessons', countByTopic[topic]) : t(lang, 'topic.empty')}
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>

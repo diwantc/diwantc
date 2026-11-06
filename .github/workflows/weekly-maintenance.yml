@@ -1,0 +1,42 @@
+name: Weekly maintenance
+
+on:
+  schedule:
+    - cron: '0 5 * * 0' # Sundays 05:00 UTC (08:00 Riyadh)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  maintenance:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      - name: Link check
+        id: links
+        continue-on-error: true
+        run: node scripts/check-links.mjs
+
+      - name: Open an issue for broken links
+        if: steps.links.outcome == 'failure'
+        run: |
+          title="Weekly link check found broken links"
+          existing=$(gh issue list --state open --search "in:title \"$title\"" --json title --jq ".[] | select(.title == \"$title\") | .title")
+          if [ -z "$existing" ]; then
+            gh issue create --title "$title" --body "Some source or lesson links failed. Details: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+          fi
+
+      - name: Re-verification due
+        run: node scripts/reverify.mjs --open-issues

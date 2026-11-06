@@ -1,0 +1,24 @@
+name: New lesson (maintainers)
+description: Plan one lesson from the topic map. Used by the new-lesson workflow.
+title: "Lesson: "
+labels: ["lesson"]
+body:
+  - type: input
+    id: lesson-id
+    attributes:
+      label: Lesson ID
+      description: From docs/topic-map.md, for example safety-l0-01.
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective
+      description: The "After this lesson the learner can …" line, copied from the topic map.
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Notes
+      description: Anything the draft must cover or avoid.
