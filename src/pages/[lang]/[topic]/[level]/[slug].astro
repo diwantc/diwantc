@@ -112,6 +112,9 @@ const isApproved = data.review.status === 'approved';
       </section>
 
       <p class="mt-6 text-sm">{t(lang, 'lesson.lastVerified', { date: formatDate(lang, data.lastVerified) })}</p>
+      <p class="mt-2">
+        <a href={`/${lang}/report/${data.lessonId}/`}>{t(lang, 'report.link')}</a>
+      </p>
       {
         data.ai.assisted && isApproved && data.review.reviewer && data.review.date && (
           <p class="mt-2 text-sm">
