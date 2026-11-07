@@ -1,0 +1,235 @@
+---
+// In-page code runner for lessons. Usage in MDX (no import needed; the
+// lesson page provides it):
+//
+//   <CodeRunner code={`
+//     let name = "سارة";
+//     console.log("مرحباً " + name);
+//   `} />
+//
+// Props:
+//   code      the starting program (required). Indentation is removed.
+//   language  "js" (default). Only JavaScript is supported for now.
+//   title     optional visible caption, e.g. "Example 1".
+//
+// The editor and output are always left-to-right; the rest follows the page.
+import { t, tPlural } from '../i18n/ui';
+import { DEFAULT_LOCALE, isLocale, type Locale } from '../lib/taxonomy';
+import {
+  EXPLAINED_ERRORS,
+  LANGUAGE_NAMES,
+  MAX_CODE_LENGTH,
+  MAX_LINE_LENGTH,
+  MAX_OUTPUT_LINES,
+  RUN_TIMEOUT_MS,
+  RUNNER_LANGUAGES,
+  SANDBOX_URLS,
+  isRunnerLanguage,
+  type ExplainedError,
+} from './runner/config';
+import { editorRows, normalizeCode } from './runner/code';
+import type { RunnerConfig, RunnerStrings } from './runner/client';
+
+interface Props {
+  code: string;
+  language?: string;
+  title?: string;
+}
+
+const { code: rawCode, language = 'js', title } = Astro.props;
+if (typeof rawCode !== 'string' || rawCode.trim() === '') {
+  throw new Error('<CodeRunner> needs a non-empty `code` prop.');
+}
+if (!isRunnerLanguage(language)) {
+  throw new Error(`<CodeRunner> language "${language}" is not supported (supported: ${RUNNER_LANGUAGES.join(', ')}).`);
+}
+
+const lang: Locale = isLocale(Astro.currentLocale) ? Astro.currentLocale : DEFAULT_LOCALE;
+const code = normalizeCode(rawCode);
+
+// Unique ids for labels, per page render.
+const id = `runner-${Math.random().toString(36).slice(2, 10)}`;
+
+const explain = Object.fromEntries([
+  ...EXPLAINED_ERRORS.map((name) => [name, t(lang, `runner.explain.${name}`)]),
+  ['other', t(lang, 'runner.explain.other')],
+]) as Record<ExplainedError | 'other', string>;
+
+const strings: RunnerStrings = {
+  running: t(lang, 'runner.status.running'),
+  done: t(lang, 'runner.status.done'),
+  empty: t(lang, 'runner.status.empty'),
+  error: t(lang, 'runner.status.error'),
+  errorLine: t(lang, 'runner.status.errorLine'),
+  timeout: t(lang, 'runner.status.timeout', { duration: tPlural(lang, 'seconds', RUN_TIMEOUT_MS / 1000) }),
+  stopped: t(lang, 'runner.status.stopped'),
+  limit: t(lang, 'runner.status.limit', { count: tPlural(lang, 'lines', MAX_OUTPUT_LINES) }),
+  unsupported: t(lang, 'runner.status.unsupported'),
+  unavailable: t(lang, 'runner.status.unavailable'),
+  reset: t(lang, 'runner.status.reset'),
+  tooLong: t(lang, 'runner.status.tooLong'),
+  levelWarn: t(lang, 'runner.level.warn'),
+  levelError: t(lang, 'runner.level.error'),
+  explain,
+};
+
+const config: RunnerConfig = {
+  sandboxUrl: SANDBOX_URLS[language],
+  maxCodeLength: MAX_CODE_LENGTH,
+  limits: { timeoutMs: RUN_TIMEOUT_MS, maxLines: MAX_OUTPUT_LINES, maxLineLength: MAX_LINE_LENGTH },
+};
+---
+
+<div
+  class="runner"
+  role="group"
+  aria-labelledby={title ? `${id}-title` : undefined}
+  aria-label={title ? undefined : t(lang, 'runner.label')}
+  data-code-runner
+  data-language={language}
+  data-strings={JSON.stringify(strings)}
+  data-config={JSON.stringify(config)}
+>
+  {title && <p id={`${id}-title`} class="font-bold mb-2">{title}</p>}
+
+  <label for={`${id}-code`} class="block font-semibold">
+    {t(lang, 'runner.code', { language: LANGUAGE_NAMES[language] })}
+  </label>
+  <p id={`${id}-hint`} class="text-sm text-muted mb-2" data-runner-js hidden>{t(lang, 'runner.hint')}</p>
+  <textarea
+    id={`${id}-code`}
+    class="runner-code"
+    dir="ltr"
+    translate="no"
+    spellcheck="false"
+    autocapitalize="off"
+    autocomplete="off"
+    autocorrect="off"
+    rows={editorRows(code)}
+    data-runner-hint={`${id}-hint`}
+    data-runner-code>{code}</textarea
+  >
+
+  <noscript>
+    <p class="text-sm text-muted mt-2">{t(lang, 'runner.noscript')}</p>
+  </noscript>
+
+  <div class="mt-3 flex flex-wrap gap-2" data-runner-js hidden>
+    <button type="button" class="runner-button runner-button--primary" aria-keyshortcuts="Control+Enter Meta+Enter" data-runner-run>
+      <span aria-hidden="true">▶</span>
+      {t(lang, 'runner.run')}
+    </button>
+    <button type="button" class="runner-button" disabled data-runner-stop>
+      <span aria-hidden="true">■</span>
+      {t(lang, 'runner.stop')}
+    </button>
+    <button type="button" class="runner-button" data-runner-reset>
+      <span aria-hidden="true">↺</span>
+      {t(lang, 'runner.reset')}
+    </button>
+  </div>
+
+  <div class="mt-3" data-runner-js hidden>
+    <p role="status" class="runner-status" data-runner-status></p>
+    <p id={`${id}-output-label`} class="font-semibold mt-2">{t(lang, 'runner.output')}</p>
+    <!-- No whitespace inside: the output keeps white-space. -->
+    <div class="runner-output" role="log" aria-labelledby={`${id}-output-label`} dir="ltr" translate="no" tabindex="0" data-runner-output></div>
+  </div>
+</div>
+
+<script>
+  import { initRunners } from './runner/client';
+  initRunners();
+</script>
+
+<style>
+  .runner {
+    margin-block: 1.5em;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    background: var(--surface);
+  }
+
+  .runner-code,
+  .runner-output {
+    display: block;
+    inline-size: 100%;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, 'Liberation Mono', monospace;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: var(--bg);
+    color: var(--fg);
+    padding: 0.5rem 0.75rem;
+  }
+
+  /* Inputs and buttons need a 3:1 boundary (WCAG 1.4.11): --muted, not --border. */
+  .runner-code {
+    border-color: var(--muted);
+    max-block-size: 28rem;
+    overflow-y: auto;
+    resize: vertical;
+    tab-size: 2;
+  }
+
+  .runner-output {
+    min-block-size: 3.5rem;
+    max-block-size: 18rem;
+    overflow: auto;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .runner-output :global(.runner-line) {
+    min-block-size: 1.6em;
+  }
+
+  .runner-output :global(.runner-line[data-level='warn']) {
+    color: var(--warn-fg);
+  }
+
+  .runner-output :global(.runner-line[data-level='error']) {
+    color: var(--error-fg);
+  }
+
+  .runner-output :global(.runner-icon) {
+    margin-inline-end: 0.5ch;
+  }
+
+  .runner-status:empty {
+    display: none;
+  }
+
+  .runner-status {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.5rem;
+    background: var(--brand-soft);
+  }
+
+  .runner-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    min-block-size: 2.75rem; /* 44px touch target */
+    padding-inline: 1rem;
+    border: 1px solid var(--muted);
+    border-radius: 0.5rem;
+    background: var(--surface);
+    color: var(--fg);
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  .runner-button--primary {
+    background: var(--brand);
+    border-color: var(--brand);
+    color: var(--brand-fg);
+  }
+
+  .runner-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+</style>
