@@ -1,6 +1,7 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../../../layouts/Base.astro';
+import ReportingChannels from '../../../../components/ReportingChannels.astro';
 import { getLessons, lessonPath, lessonSlug, type Lesson } from '../../../../lib/lessons';
 import { formatDate, formatList, t, tPlural } from '../../../../i18n/ui';
 import type { Level } from '../../../../lib/taxonomy';
@@ -90,7 +91,8 @@ const isApproved = data.review.status === 'approved';
     </header>
 
     <div class="lesson">
-      <Content />
+      {/* Components lessons may use without an import. */}
+      <Content components={{ ReportingChannels }} />
     </div>
 
     <footer class="mt-12 border-t border-border pt-6 text-muted">

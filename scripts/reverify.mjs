@@ -2,13 +2,16 @@
 // Lists lessons whose facts are due for re-verification (decided 2026-11-06):
 //   - every 3 months: topic "ai" and lessons with device-specific steps (platforms)
 //   - every 12 months: everything else
-// Reporting-channel data (src/data/reporting-channels) joins this check when it exists.
+//   - every 3 months: each reporting channel (src/data/reporting-channels)
 //
 // Usage: node scripts/reverify.mjs [lessons-dir] [--json] [--open-issues]
 //   --open-issues  open one GitHub issue per due lesson version (needs `gh` and GH_TOKEN)
 import { execFileSync } from 'node:child_process';
 import { appendFileSync } from 'node:fs';
 import { lessonsRoot, readLessons } from './lib/read-lessons.mjs';
+import { readReportingChannels } from './lib/read-data.mjs';
+
+const CHANNEL_MONTHS = 3;
 
 const args = process.argv.slice(2);
 const root = lessonsRoot(args.find((a) => !a.startsWith('--')));
@@ -31,6 +34,22 @@ for (const { rel, frontmatter: fm } of await readLessons(root)) {
   const limit = monthsLimit(fm);
   if (addMonths(last, limit) <= now) {
     due.push({ lessonId: fm.lessonId, lang: fm.lang, file: rel, lastVerified: last.toISOString().slice(0, 10), limitMonths: limit });
+  }
+}
+
+for (const { rel, data } of await readReportingChannels()) {
+  for (const channel of data?.channels ?? []) {
+    if (!channel?.lastVerified) continue;
+    const last = new Date(channel.lastVerified);
+    if (addMonths(last, CHANNEL_MONTHS) <= now) {
+      due.push({
+        lessonId: `reporting channel ${data.country}/${channel.id}`,
+        lang: data.country,
+        file: `src/data/reporting-channels/${rel}`,
+        lastVerified: last.toISOString().slice(0, 10),
+        limitMonths: CHANNEL_MONTHS,
+      });
+    }
   }
 }
 

@@ -1,15 +1,20 @@
 #!/usr/bin/env node
-// Checks that every source URL and every web link in lessons still answers.
+// Checks that every source URL and every web link in lessons, and every
+// reporting-channel source and website, still answers.
 // 404/410, 5xx and network failures are errors. 401/403/429 are warnings:
 // some sites block automated checks, so those need a manual look.
 //
 // Usage: node scripts/check-links.mjs [lessons-dir]
 import { lessonsRoot, readLessons, report } from './lib/read-lessons.mjs';
+import { readReportingChannels } from './lib/read-data.mjs';
 
 const root = lessonsRoot(process.argv.slice(2).find((a) => !a.startsWith('--')));
 const TIMEOUT_MS = 15_000;
 const CONCURRENCY = 5;
 const USER_AGENT = 'DiwanTC-link-check/1.0 (+https://github.com/diwantc/diwantc)';
+// Some official sites send an incomplete TLS certificate chain. Browsers
+// complete it themselves; Node does not. Report those as warnings.
+const TLS_CHAIN_ERRORS = new Set(['UNABLE_TO_VERIFY_LEAF_SIGNATURE', 'UNABLE_TO_GET_ISSUER_CERT_LOCALLY']);
 
 const lessons = await readLessons(root);
 const urls = new Map(); // url -> first file that uses it
@@ -19,6 +24,15 @@ for (const { file, frontmatter, body } of lessons) {
   for (const m of body.matchAll(/\]\((https?:\/\/[^)\s]+)\)|href=["'](https?:\/\/[^"']+)["']/g)) {
     const url = m[1] ?? m[2];
     urls.has(url) || urls.set(url, file);
+  }
+}
+
+// Reporting-channel sources and website contacts are checked too.
+for (const { file, data } of await readReportingChannels()) {
+  for (const channel of data?.channels ?? []) {
+    const url = channel?.source?.url;
+    if (url) urls.has(url) || urls.set(url, file);
+    if (channel?.type === 'website' && /^https?:\/\//.test(channel.contact ?? '')) urls.has(channel.contact) || urls.set(channel.contact, file);
   }
 }
 
@@ -34,7 +48,8 @@ async function request(url, method) {
     });
     return { status: res.status };
   } catch (err) {
-    return { status: 0, reason: err.name === 'AbortError' ? 'timeout' : err.message };
+    const code = err.cause?.code;
+    return { status: 0, reason: err.name === 'AbortError' ? 'timeout' : code ?? err.message, tls: TLS_CHAIN_ERRORS.has(code) };
   } finally {
     clearTimeout(timer);
   }
@@ -55,9 +70,12 @@ const queue = [...urls.entries()];
 async function worker() {
   while (queue.length) {
     const [url, file] = queue.shift();
-    const { status, reason } = await check(url);
+    const { status, reason, tls } = await check(url);
     if (status >= 200 && status < 400) continue;
-    if ([401, 403, 429].includes(status)) {
+    if (tls) {
+      warnings++;
+      report('warning', file, `${url}: incomplete TLS certificate chain (${reason}) — opens in browsers; verify by hand`);
+    } else if ([401, 403, 429].includes(status)) {
       warnings++;
       report('warning', file, `${url} answered ${status} (blocked automated check — verify by hand)`);
     } else {
