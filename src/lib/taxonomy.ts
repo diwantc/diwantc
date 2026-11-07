@@ -40,3 +40,10 @@ export type Platform = (typeof PLATFORMS)[number];
 export function isLocale(value: string | undefined): value is Locale {
   return (LOCALES as readonly string[]).includes(value ?? '');
 }
+
+/** How a reporting channel is reached (src/data/reporting-channels). */
+export const CHANNEL_TYPES = ['sms', 'phone', 'website', 'app', 'email'] as const;
+export type ChannelType = (typeof CHANNEL_TYPES)[number];
+
+/** Reporting-channel entries are re-verified every 3 months (decided 2026-11-06). */
+export const CHANNEL_REVERIFY_MONTHS = 3;

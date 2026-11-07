@@ -83,6 +83,7 @@ the start.**
   → main French- and English-speaking countries.
 - Contacts change: the weekly CI job flags entries whose `lastVerified` is
   older than 3 months (decided 2026-11-06).
+- Data format, rules and coverage: [`reporting-channels.md`](reporting-channels.md).
 
 **Later levels**
 - **L1:** password managers, backups, home Wi-Fi security, privacy settings in social apps.

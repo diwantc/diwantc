@@ -1,7 +1,7 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
-import { LOCALES, PLATFORMS, TOPICS } from './lib/taxonomy';
+import { CHANNEL_TYPES, LOCALES, PLATFORMS, TOPICS } from './lib/taxonomy';
 
 // Lessons live in src/content/lessons/<lang>/<topic>/l<level>/<nn>-<slug>.mdx
 // LESSONS_DIR lets `npm run dev:demo` point at the test fixtures instead.
@@ -72,4 +72,49 @@ const lessons = defineCollection({
     }),
 });
 
-export const collections = { lessons };
+// Official reporting channels per country, for safety-l0-07 (one YAML file per
+// country in src/data/reporting-channels). Contacts are the same in every
+// language; names and descriptions are translated. An entry without an
+// official https source does not validate, so it is never shown.
+const localized = z.object({ ar: z.string().min(1), en: z.string().min(1), fr: z.string().min(1) });
+
+const channel = z
+  .object({
+    id: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+    type: z.enum(CHANNEL_TYPES),
+    // Numbers and web addresses are the same in every language; an app name may be translated.
+    contact: z.union([z.string().min(1), localized]),
+    name: localized,
+    use: localized,
+    source: z.object({
+      title: z.string().min(1),
+      publisher: localized,
+      url: z.url().refine((url) => url.startsWith('https://'), 'source.url must use https'),
+      lang: z.string().min(2),
+    }),
+    lastVerified: z.coerce.date(),
+  })
+  .superRefine((entry, ctx) => {
+    if (typeof entry.contact !== 'string') {
+      if (entry.type !== 'app') ctx.addIssue({ code: 'custom', path: ['contact'], message: 'only an app name may be translated' });
+      return;
+    }
+    if (entry.type === 'website' && !/^https:\/\//.test(entry.contact)) {
+      ctx.addIssue({ code: 'custom', path: ['contact'], message: 'a website contact must be an https URL' });
+    }
+    if ((entry.type === 'sms' || entry.type === 'phone') && !/^\+?[0-9 ]{3,20}$/.test(entry.contact)) {
+      ctx.addIssue({ code: 'custom', path: ['contact'], message: 'an sms or phone contact must be digits' });
+    }
+  });
+
+const reportingChannels = defineCollection({
+  loader: glob({ pattern: '*.yaml', base: './src/data/reporting-channels' }),
+  schema: z.object({
+    country: z.string().regex(/^[a-z]{2}$/),
+    order: z.number().int().min(1),
+    name: localized,
+    channels: z.array(channel).min(1),
+  }),
+});
+
+export const collections = { lessons, reportingChannels };
