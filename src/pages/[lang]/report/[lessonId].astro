@@ -1,0 +1,285 @@
+---
+// "Found a mistake?" form for one lesson in one language. No account, no
+// personal data. Posts to the Pages Function in functions/api/report.ts.
+// See docs/error-reports.md.
+import Base from '../../../layouts/Base.astro';
+import { getLessons, lessonPath, type Lesson } from '../../../lib/lessons';
+import { t } from '../../../i18n/ui';
+import { DEFAULT_REPO, LIMITS } from '../../../../functions/api/report';
+
+export async function getStaticPaths() {
+  const lessons = await getLessons();
+  return lessons.map((lesson) => ({
+    params: { lang: lesson.data.lang, lessonId: lesson.data.lessonId },
+    props: { lesson },
+  }));
+}
+
+interface Props {
+  lesson: Lesson;
+}
+
+const { lesson } = Astro.props;
+const { lang, lessonId, title } = lesson.data;
+const siteKey: string = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY ?? '';
+const limits = { min: LIMITS.problemMin, max: LIMITS.problemMax };
+
+// Fallback for readers without JavaScript or when the form is down: the
+// GitHub issue form (needs an account), with the title filled in.
+const github = new URL(`https://github.com/${DEFAULT_REPO}/issues/new`);
+github.searchParams.set('template', 'report-error.yml');
+github.searchParams.set('title', `Error: ${lessonId} (${lang})`);
+
+const messages = {
+  sending: t(lang, 'report.sending'),
+  success: t(lang, 'report.success'),
+  successLink: t(lang, 'report.successLink'),
+  invalid: t(lang, 'report.error.invalid', limits),
+  captcha: t(lang, 'report.error.captcha'),
+  'rate-limited': t(lang, 'report.error.rateLimited'),
+  unavailable: t(lang, 'report.error.unavailable'),
+};
+---
+
+<Base lang={lang} title={t(lang, 'report.title')} noindex>
+  <p class="mb-2">
+    <a href={lessonPath(lesson)}>{t(lang, 'report.back')}</a>
+  </p>
+
+  <h1 class="text-3xl font-bold mb-4">{t(lang, 'report.title')}</h1>
+
+  <p class="mb-2">
+    <span class="font-semibold">{t(lang, 'report.lesson')}</span>{' '}
+    <a href={lessonPath(lesson)}>{title}</a>
+  </p>
+  <p class="mb-2">{t(lang, 'report.intro')}</p>
+  <p class="mb-6 text-muted">{t(lang, 'report.privacy')}</p>
+
+  <noscript>
+    <p class="mb-4">{t(lang, 'report.noscript')}</p>
+    <p><a href={github.href} lang="en">{t(lang, 'report.github')}</a></p>
+  </noscript>
+
+  {
+    siteKey ? (
+      <form
+        class="report-form flex flex-col gap-4"
+        method="post"
+        action="/api/report"
+        novalidate
+        hidden
+        data-report-form
+        data-sitekey={siteKey}
+        data-lang={lang}
+        data-messages={JSON.stringify(messages)}
+        data-min={limits.min}
+      >
+        <input type="hidden" name="lessonId" value={lessonId} />
+        <input type="hidden" name="lang" value={lang} />
+
+        <div>
+          <label for="report-problem" class="block font-semibold mb-1">
+            {t(lang, 'report.problem')}
+          </label>
+          <p id="report-problem-help" class="text-sm text-muted mb-2">
+            {t(lang, 'report.problemHelp', limits)}
+          </p>
+          <textarea
+            id="report-problem"
+            name="problem"
+            rows="6"
+            required
+            minlength={limits.min}
+            maxlength={limits.max}
+            dir="auto"
+            aria-describedby="report-problem-help"
+            class="report-input"
+          />
+        </div>
+
+        <div class="report-honeypot" aria-hidden="true">
+          <label for="report-website">{t(lang, 'report.honeypot')}</label>
+          <input id="report-website" type="text" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
+        <div data-turnstile />
+
+        <p data-report-error role="alert" class="report-error font-semibold" />
+
+        <div>
+          <button type="submit" class="report-submit" data-report-submit>
+            {t(lang, 'report.submit')}
+          </button>
+        </div>
+      </form>
+    ) : (
+      <div class="report-fallback" data-report-fallback>
+        <p class="mb-4">{t(lang, 'report.error.unavailable')}</p>
+        <p>
+          <a href={github.href} lang="en">
+            {t(lang, 'report.github')}
+          </a>
+        </p>
+      </div>
+    )
+  }
+
+  <div data-report-done hidden role="status" tabindex="-1" class="report-done">
+    <p class="font-semibold mb-2" data-report-done-text></p>
+    <p><a data-report-issue href="#" rel="noopener"></a></p>
+  </div>
+
+  <p data-report-github-fallback hidden class="mt-4">
+    <a href={github.href} lang="en">{t(lang, 'report.github')}</a>
+  </p>
+</Base>
+
+<script>
+  // Turnstile is loaded only on this page, and only once JavaScript runs.
+  type Messages = Record<'sending' | 'success' | 'successLink' | 'invalid' | 'captcha' | 'rate-limited' | 'unavailable', string>;
+  interface TurnstileApi {
+    render(container: HTMLElement, options: Record<string, unknown>): string;
+    getResponse(widgetId: string): string | undefined;
+    reset(widgetId: string): void;
+  }
+
+  const form = document.querySelector<HTMLFormElement>('[data-report-form]');
+  const done = document.querySelector<HTMLElement>('[data-report-done]');
+  const githubFallback = document.querySelector<HTMLElement>('[data-report-github-fallback]');
+
+  if (form && done && githubFallback) {
+    const messages = JSON.parse(form.dataset.messages ?? '{}') as Messages;
+    const minLength = Number(form.dataset.min);
+    const errorBox = form.querySelector<HTMLElement>('[data-report-error]')!;
+    const submit = form.querySelector<HTMLButtonElement>('[data-report-submit]')!;
+    const problem = form.querySelector<HTMLTextAreaElement>('textarea[name="problem"]')!;
+    const widget = form.querySelector<HTMLElement>('[data-turnstile]')!;
+    const submitLabel = submit.textContent ?? '';
+    let widgetId: string | undefined;
+
+    const turnstile = () => (window as unknown as { turnstile?: TurnstileApi }).turnstile;
+
+    const showError = (code: keyof Messages) => {
+      errorBox.textContent = messages[code] ?? messages.unavailable;
+      // If the form cannot work for this reader, offer the GitHub issue form.
+      githubFallback.hidden = code !== 'unavailable' && code !== 'captcha';
+      if (code === 'invalid') problem.focus();
+    };
+
+    (window as unknown as Record<string, unknown>).diwantcTurnstileLoad = () => {
+      widgetId = turnstile()?.render(widget, {
+        sitekey: form.dataset.sitekey,
+        language: form.dataset.lang,
+        size: 'flexible',
+        theme: 'auto',
+        'error-callback': () => showError('unavailable'),
+      });
+    };
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit&onload=diwantcTurnstileLoad';
+    script.async = true;
+    script.onerror = () => showError('unavailable');
+    document.head.append(script);
+
+    form.hidden = false;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      errorBox.textContent = '';
+      githubFallback.hidden = true;
+
+      const data = new FormData(form);
+      const text = String(data.get('problem') ?? '').trim();
+      if ([...text].length < minLength) return showError('invalid');
+
+      const token = widgetId === undefined ? '' : (turnstile()?.getResponse(widgetId) ?? '');
+      if (!token) return showError('captcha');
+
+      submit.disabled = true;
+      submit.textContent = messages.sending;
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            lessonId: data.get('lessonId'),
+            lang: data.get('lang'),
+            problem: text,
+            website: data.get('website'),
+            token,
+          }),
+        });
+        const result = (await response.json().catch(() => ({}))) as {
+          ok?: boolean;
+          error?: keyof Messages;
+          issue?: { url?: string };
+        };
+        if (result.ok) {
+          form.hidden = true;
+          done.hidden = false;
+          done.querySelector('[data-report-done-text]')!.textContent = messages.success;
+          const link = done.querySelector<HTMLAnchorElement>('[data-report-issue]')!;
+          if (result.issue?.url?.startsWith('https://github.com/')) {
+            link.href = result.issue.url;
+            link.textContent = messages.successLink;
+          } else {
+            link.remove();
+          }
+          done.focus();
+          return;
+        }
+        showError(result.error ?? 'unavailable');
+      } catch {
+        showError('unavailable');
+      } finally {
+        submit.disabled = false;
+        submit.textContent = submitLabel;
+        // A Turnstile token works once: get a fresh one unless the report was sent.
+        if (widgetId !== undefined && done.hidden) turnstile()?.reset(widgetId);
+      }
+    });
+  }
+</script>
+
+<style>
+  .report-input {
+    inline-size: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--muted); /* 3:1 boundary for an input (WCAG 1.4.11) */
+    border-radius: 0.5rem;
+    background: var(--surface);
+    color: var(--fg);
+  }
+
+  .report-submit {
+    min-block-size: 2.75rem; /* 44px touch target */
+    padding-inline: 1.25rem;
+    border-radius: 0.5rem;
+    background: var(--brand);
+    color: var(--brand-fg);
+    font-weight: 600;
+  }
+
+  .report-submit:disabled {
+    opacity: 0.7;
+  }
+
+  .report-error:empty {
+    display: none;
+  }
+
+  /* Off-screen, not display:none, so simple bots still see and fill it. */
+  .report-honeypot {
+    position: absolute;
+    inset-inline-start: -10000px;
+    block-size: 1px;
+    inline-size: 1px;
+    overflow: hidden;
+  }
+
+  .report-done {
+    padding: 1rem;
+    border-radius: 0.75rem;
+    background: var(--brand-soft);
+  }
+</style>

@@ -6,3 +6,6 @@ dist/
 !.env.example
 .DS_Store
 *.log
+
+# Cloudflare Pages Functions local secrets (wrangler)
+.dev.vars*
