@@ -1,0 +1,73 @@
+# Official reporting channels — United Arab Emirates.
+# Every channel needs an official source opened by the person who adds or
+# re-checks it. Re-verify every 3 months (scripts/reverify.mjs).
+country: ae
+order: 2
+name:
+  ar: "الإمارات"
+  en: "United Arab Emirates"
+  fr: "Émirats arabes unis"
+channels:
+  - id: moi-ecrimes
+    type: app
+    contact:
+      ar: "منصة الجرائم الإلكترونية — تطبيق وزارة الداخلية"
+      en: "eCrimes platform — Ministry of Interior app"
+      fr: "Plateforme eCrimes — application du ministère de l'Intérieur"
+    name:
+      ar: "الإبلاغ عن الجرائم الإلكترونية — وزارة الداخلية"
+      en: "Report cybercrime — Ministry of Interior"
+      fr: "Signaler la cybercriminalité — ministère de l'Intérieur"
+    use:
+      ar: "للإبلاغ عن جريمة إلكترونية، ومنها الاحتيال، من تطبيق وزارة الداخلية على جوالك."
+      en: "Report a cybercrime, including fraud, in the Ministry of Interior app on your phone."
+      fr: "Pour signaler un cybercrime, y compris une fraude, dans l'application du ministère de l'Intérieur sur votre téléphone."
+    source:
+      title: "الأمن السيبراني والسلامة الرقمية"
+      publisher:
+        ar: "البوابة الرسمية لحكومة الإمارات (u.ae)"
+        en: "Official portal of the UAE Government (u.ae)"
+        fr: "Portail officiel du gouvernement des Émirats (u.ae)"
+      url: "https://u.ae/ar/information-and-services/justice-safety-and-the-law/Safety/cyber-safety-and-digital-security"
+      lang: ar
+    lastVerified: 2026-11-07
+  - id: dubai-police-ecrime
+    type: website
+    contact: "https://ecrimehub.gov.ae/"
+    name:
+      ar: "منصة eCrime — شرطة دبي"
+      en: "eCrime platform — Dubai Police"
+      fr: "Plateforme eCrime — police de Dubaï"
+    use:
+      ar: "للإبلاغ عن الجرائم المالية والاحتيال عبر الإنترنت."
+      en: "Report cyber-enabled financial crimes and scams."
+      fr: "Pour signaler les crimes financiers et les arnaques en ligne."
+    source:
+      title: "Reporting economic crimes"
+      publisher:
+        ar: "البوابة الرسمية لحكومة الإمارات (u.ae)"
+        en: "Official portal of the UAE Government (u.ae)"
+        fr: "Portail officiel du gouvernement des Émirats (u.ae)"
+      url: "https://u.ae/en/information-and-services/business/important-digital-services/reporting-economic-crimes"
+      lang: en
+    lastVerified: 2026-11-07
+  - id: police-999
+    type: phone
+    contact: "999"
+    name:
+      ar: "الشرطة"
+      en: "Police"
+      fr: "Police"
+    use:
+      ar: "اتصل بالشرطة لطلب المساعدة، أو توجّه إلى أقرب مركز شرطة للإبلاغ عن جريمة إلكترونية."
+      en: "Call the police for help, or go to the nearest police station to report a cybercrime."
+      fr: "Appelez la police pour obtenir de l'aide, ou rendez-vous au poste de police le plus proche pour signaler un cybercrime."
+    source:
+      title: "الأمن السيبراني والسلامة الرقمية"
+      publisher:
+        ar: "البوابة الرسمية لحكومة الإمارات (u.ae)"
+        en: "Official portal of the UAE Government (u.ae)"
+        fr: "Portail officiel du gouvernement des Émirats (u.ae)"
+      url: "https://u.ae/ar/information-and-services/justice-safety-and-the-law/Safety/cyber-safety-and-digital-security"
+      lang: ar
+    lastVerified: 2026-11-07

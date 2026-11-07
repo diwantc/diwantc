@@ -1,0 +1,50 @@
+# Official reporting channels — Qatar.
+# Every channel needs an official source opened by the person who adds or
+# re-checks it. Re-verify every 3 months (scripts/reverify.mjs).
+country: qa
+order: 4
+name:
+  ar: "قطر"
+  en: "Qatar"
+  fr: "Qatar"
+channels:
+  - id: qcb-complaints-phone
+    type: phone
+    contact: "8000700"
+    name:
+      ar: "إدارة حماية العملاء — مصرف قطر المركزي"
+      en: "Customer Protection Department — Qatar Central Bank"
+      fr: "Département de protection des clients — Banque centrale du Qatar"
+    use:
+      ar: "لشكاوى العملاء على المؤسسات المالية، مثل البنوك."
+      en: "For customer complaints about financial institutions, such as banks."
+      fr: "Pour les réclamations des clients contre les établissements financiers, comme les banques."
+    source:
+      title: "Customer Protection Department"
+      publisher:
+        ar: "مصرف قطر المركزي"
+        en: "Qatar Central Bank (QCB)"
+        fr: "Banque centrale du Qatar (QCB)"
+      url: "https://www.qcb.gov.qa/en/pages/customer-protection-department.aspx"
+      lang: en
+    lastVerified: 2026-11-07
+  - id: qcb-complaints-email
+    type: email
+    contact: "cp@qcb.gov.qa"
+    name:
+      ar: "إدارة حماية العملاء — البريد الإلكتروني"
+      en: "Customer Protection Department — email"
+      fr: "Département de protection des clients — e-mail"
+    use:
+      ar: "لإرسال شكوى على مؤسسة مالية بالبريد الإلكتروني."
+      en: "To send a complaint about a financial institution by email."
+      fr: "Pour envoyer par e-mail une réclamation contre un établissement financier."
+    source:
+      title: "Customer Protection Department"
+      publisher:
+        ar: "مصرف قطر المركزي"
+        en: "Qatar Central Bank (QCB)"
+        fr: "Banque centrale du Qatar (QCB)"
+      url: "https://www.qcb.gov.qa/en/pages/customer-protection-department.aspx"
+      lang: en
+    lastVerified: 2026-11-07
