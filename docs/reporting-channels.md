@@ -49,8 +49,14 @@ breaks YAML otherwise.
   whose `lastVerified` is older than 3 months; the weekly workflow opens an
   issue for each one. Re-open the source, then update the entry and the date.
 - **Links are checked weekly** (`scripts/check-links.mjs`): every source URL
-  and every website contact. A 403 or an incomplete TLS certificate chain
-  is a warning (open the page by hand); anything else that fails is an error.
+  and every website contact. These are warnings (open the page by hand):
+  - a 403;
+  - an incomplete TLS certificate chain;
+  - a timeout on a Gulf government domain (`.gov.sa`, `.gov.ae`, `.gov.kw`,
+    `.gov.qa`, `.gov.bh`, `.gov.om`). Several of these sites do not answer
+    GitHub's servers abroad, though they open from the region.
+
+  Anything else that fails is an error.
 
 ## Coverage
 

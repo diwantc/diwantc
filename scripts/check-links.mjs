@@ -2,7 +2,8 @@
 // Checks that every source URL and every web link in lessons, and every
 // reporting-channel source and website, still answers.
 // 404/410, 5xx and network failures are errors. 401/403/429 are warnings:
-// some sites block automated checks, so those need a manual look.
+// some sites block automated checks, so those need a manual look. So are an
+// incomplete TLS chain and a timeout on a Gulf government domain (see below).
 //
 // Usage: node scripts/check-links.mjs [lessons-dir]
 import { lessonsRoot, readLessons, report } from './lib/read-lessons.mjs';
@@ -15,6 +16,12 @@ const USER_AGENT = 'DiwanTC-link-check/1.0 (+https://github.com/diwantc/diwantc)
 // Some official sites send an incomplete TLS certificate chain. Browsers
 // complete it themselves; Node does not. Report those as warnings.
 const TLS_CHAIN_ERRORS = new Set(['UNABLE_TO_VERIFY_LEAF_SIGNATURE', 'UNABLE_TO_GET_ISSUER_CERT_LOCALLY']);
+// Some Gulf government sites do not answer requests from outside the region.
+// Seen 2026-11-07: the same pages opened from Saudi Arabia but timed out from
+// GitHub Actions runners. A timeout on these domains is a warning, not an
+// error. A missing domain (DNS) or an HTTP error is still an error.
+const GULF_GOV = /\.gov\.(sa|ae|kw|qa|bh|om)$/;
+const TIMEOUTS = new Set(['timeout', 'ETIMEDOUT', 'UND_ERR_CONNECT_TIMEOUT', 'UND_ERR_HEADERS_TIMEOUT']);
 
 const lessons = await readLessons(root);
 const urls = new Map(); // url -> first file that uses it
@@ -75,6 +82,9 @@ async function worker() {
     if (tls) {
       warnings++;
       report('warning', file, `${url}: incomplete TLS certificate chain (${reason}) — opens in browsers; verify by hand`);
+    } else if (status === 0 && TIMEOUTS.has(reason) && GULF_GOV.test(new URL(url).hostname)) {
+      warnings++;
+      report('warning', file, `${url} timed out (${reason}); Gulf government sites often block requests from abroad — verify by hand`);
     } else if ([401, 403, 429].includes(status)) {
       warnings++;
       report('warning', file, `${url} answered ${status} (blocked automated check — verify by hand)`);
