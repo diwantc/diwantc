@@ -70,14 +70,14 @@ const isApproved = data.review.status === 'approved';
 
       <dl class="mt-4 flex flex-wrap gap-x-8 gap-y-2 text-muted">
         <div>
-          <dt class="inline">{t(lang, 'lesson.duration')}:</dt>
-          <dd class="inline">{tPlural(lang, 'minutes', data.duration)}</dd>
+          <dt class="inline">{t(lang, 'lesson.duration')}</dt>
+          <dd class="inline ms-1">{tPlural(lang, 'minutes', data.duration)}</dd>
         </div>
         {
           data.platforms && data.platforms.length > 0 && (
             <div>
-              <dt class="inline">{t(lang, 'lesson.platforms')}:</dt>
-              <dd class="inline">
+              <dt class="inline">{t(lang, 'lesson.platforms')}</dt>
+              <dd class="inline ms-1">
                 {formatList(
                   lang,
                   data.platforms.map((p) => t(lang, `platform.${p}`)),
@@ -128,7 +128,7 @@ const isApproved = data.review.status === 'approved';
       {
         prev ? (
           <a href={lessonPath(prev)} rel="prev" class="rounded-lg border border-border px-4 py-2 no-underline">
-            {t(lang, 'lesson.prev')}: {prev.data.title}
+            {t(lang, 'lesson.prev', { title: prev.data.title })}
           </a>
         ) : (
           <span />
@@ -137,7 +137,7 @@ const isApproved = data.review.status === 'approved';
       {
         next && (
           <a href={lessonPath(next)} rel="next" class="rounded-lg bg-brand text-brand-fg px-4 py-2 no-underline">
-            {t(lang, 'lesson.next')}: {next.data.title}
+            {t(lang, 'lesson.next', { title: next.data.title })}
           </a>
         )
       }

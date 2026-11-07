@@ -142,6 +142,11 @@ Status moves to `review.status: in-review` when the PR is marked ready.
 | Approval | A lesson merged to `main` has `review.status: approved`, `reviewer` and `date` |
 | Build | Site builds |
 
+The workflow runs these as two jobs. **Checks** runs every row except
+Approval; it must be green before review starts. **Approval** stays red
+while a lesson is in review and turns green once all three versions are
+approved. Branch protection on `main` requires both.
+
 **Warnings** (shown, do not block):
 
 - Length outside 400–800 words.
