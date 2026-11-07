@@ -8,8 +8,13 @@ on:
 permissions:
   contents: read
 
+# Two jobs, so a lesson PR in review shows exactly what is wrong:
+# - "Checks" must be green before review starts.
+# - "Approval" stays red until all three language versions are approved.
+# Branch protection on main requires both.
 jobs:
   checks:
+    name: Checks
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v7
@@ -21,10 +26,9 @@ jobs:
 
       - run: npm ci
 
-      # Blocking: structure, all three languages, alt text, sources,
-      # and only approved lessons may reach main.
+      # Structure, all three languages, alt text, sources.
       - name: Lesson rules
-        run: node scripts/check-content.mjs --require-approved
+        run: node scripts/check-content.mjs
 
       - name: Links
         run: node scripts/check-links.mjs
@@ -38,3 +42,20 @@ jobs:
       # The build also validates every lesson's frontmatter against the schema.
       - name: Build
         run: npm run build
+
+  approval:
+    name: Approval
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      # Only approved lessons (status, reviewer and date set) may reach main.
+      - name: All lessons approved
+        run: node scripts/check-content.mjs --require-approved
