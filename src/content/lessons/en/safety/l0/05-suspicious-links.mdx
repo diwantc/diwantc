@@ -1,0 +1,135 @@
+---
+lessonId: safety-l0-05
+lang: en
+sourceLang: ar
+topic: safety
+level: 0
+order: 5
+title: "Suspicious links and fake websites"
+summary: "Read the site name in a link before you open it: scammers make sites whose names are close to the real ones."
+objective: "Check a link before opening it."
+duration: 7
+prerequisites: []
+terms: ["link", "site name (domain)", "encryption and https"]
+sources:
+  - title: "Catch the Phish Awareness Campaign"
+    publisher: "Communications, Space and Technology Commission (CST), Saudi Arabia"
+    url: "https://www.cst.gov.sa/en/knowledge-center/user-awareness/catch-the-phish-1"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Banner and slides on this page (site updated 11/07/2026): official Saudi government websites end with .gov.sa; secure Saudi websites use HTTPS for encryption; the phisher tries to make a site look trustworthy with https; even if a link contains https, check its source and sender. The footer links my.gov.sa as the national platform"
+  - title: "Shopping and paying safely online"
+    publisher: "National Cyber Security Centre (NCSC), UK"
+    url: "https://www.ncsc.gov.uk/guidance/shopping-online-securely"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Scammers use deceptive website names that are easily mistaken for the genuine one; type the official website address into the address bar yourself; if unsure about a link you receive, don't click it"
+  - title: "Phishing scams"
+    publisher: "Scamwatch, National Anti-Scam Centre, Australia"
+    url: "https://www.scamwatch.gov.au/types-of-scams/phishing-scams"
+    lang: en
+    accessed: 2026-11-07
+    supports: "A website address slightly different from the usual one is a warning sign; don't click links in texts or emails; use the organisation's official app or contact details you find yourself"
+  - title: "Browse the web using Safari on iPhone"
+    publisher: "Apple"
+    url: "https://support.apple.com/guide/iphone/browse-the-web-iph1fbef4daa/ios"
+    lang: en
+    accessed: 2026-11-07
+    supports: "iPhone User Guide (iOS 27): touch and hold a link in Safari to preview it without opening the page; tapping the preview or Open opens it; tapping outside the preview closes it"
+  - title: "What is a URL?"
+    publisher: "MDN Web Docs (Mozilla)"
+    url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_URL"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Parts of a URL: the scheme (https), then after :// the domain name of the server, then the path that starts with /"
+lastVerified: 2026-11-07
+ai:
+  assisted: true
+  model: "claude-opus-5-5"
+review:
+  status: in-review
+---
+
+## Why it matters
+
+You get a link in a message, tap it, and it opens a site that looks like your bank's or a government office's. But it is a fake site made by a scammer to take your password or card details. In this lesson you learn how to check a link before you open it.
+
+## The idea
+
+A link is the address of a page on the internet. Its most important part is the site name (domain): what comes after `https://` up to the first `/`. In the link `https://www.cst.gov.sa/ar/knowledge-center`, the site name is `www.cst.gov.sa`.
+
+A scammer makes a site whose name is close to the real one: they change a letter, add a word, or change the end of the name. So:
+
+1. **Read the site name letter by letter,** especially its end.
+2. **Official Saudi government site names end in `.gov.sa`.** If a message says it is from a Saudi government body and the site name in its link does not end in `.gov.sa`, do not open it.
+3. **`https` does not prove a site is real.** A link may start with `https`, which means the connection to the site is encrypted, that is, protected from eavesdropping. But it does not mean the site's owner is honest: government sites use it, and scammers use it too, to make their site look trustworthy.
+4. **The safest choice is not to open a link from a message you did not expect.** Type the site name into the browser yourself, or open the organization's official app.
+
+How can you tell that the message itself is a scam? See the lesson "Spotting scam messages".
+
+## Step by step
+
+### Read the site name in a link
+
+1. `https://my.gov.sa`
+   The site name is `my.gov.sa`. It ends in `.gov.sa`, so it is a government site.
+2. `https://my.gov.sa.example.com`
+   The site name is `my.gov.sa.example.com`. It starts with `my.gov.sa` but ends in `.example.com`, so it is not a government site.
+3. `https://example.com/my.gov.sa`
+   The site name is `example.com`. Here `my.gov.sa` comes after the first `/`, so it is not part of the site name.
+
+We wrote the names that contain `example` only as examples.
+
+### On iPhone: preview a link before opening it
+
+This works for links inside pages in Safari.
+
+1. Put your finger on the link and keep it there for a moment without lifting it (touch and hold).
+2. A preview of the link appears without the page opening, with an Open button. Do not tap the preview or Open: both open the page.
+3. Do not judge the site by how it looks in the preview: a fake site looks like the real one.
+4. To close the preview and stay on your page, tap the screen away from it.
+
+If your phone is Android, or you do not know how to see a link without opening it, do not open it. Type the site name yourself or open the official app.
+
+## Try it
+
+Open an old message that contains a link, without tapping the link. Read the site name in it, from after `https://` up to the first `/`: does it end the way you expect for the organization that sent it?
+
+## Check yourself
+
+**1. A message says it is from a Saudi government body. Which of these links could be its site?**
+
+- a. `https://my.gov.sa.example.com`
+- b. `https://my.gov.sa`
+- c. `https://example.com/my.gov.sa`
+
+<details>
+<summary>Show the answer</summary>
+
+b. In (a) the site name ends in `.example.com`, and in (c) the site name is `example.com`.
+
+</details>
+
+**2. A link starts with `https`. Does that mean the site is real?**
+
+<details>
+<summary>Show the answer</summary>
+
+No. `https` means the connection is encrypted, and scammers use it too. Read the site name itself.
+
+</details>
+
+**3. A message that says it is from your bank has a link to update your details. What is safest?**
+
+<details>
+<summary>Show the answer</summary>
+
+Do not open the link: it may lead you to a fake site that looks like the bank's. Open the bank's official app, or type its site name yourself.
+
+</details>
+
+## Key points
+
+- Read the site name in a link, from after `https://` up to the first `/`, letter by letter and especially its end.
+- Saudi government site names end in `.gov.sa`, and `https` alone does not prove a site is real.
+- Safest: do not open a link from a message you did not expect. Type the site name yourself or open the official app.

@@ -1,0 +1,135 @@
+---
+lessonId: safety-l0-05
+lang: fr
+sourceLang: ar
+topic: safety
+level: 0
+order: 5
+title: "Liens suspects et faux sites web"
+summary: "Lisez le nom du site dans un lien avant de l'ouvrir : les escrocs créent des sites aux noms proches des vrais."
+objective: "Vérifier un lien avant de l'ouvrir."
+duration: 7
+prerequisites: []
+terms: ["lien", "nom du site (domaine)", "chiffrement et https"]
+sources:
+  - title: "Catch the Phish Awareness Campaign"
+    publisher: "Commission des communications, de l'espace et de la technologie (CST), Arabie saoudite"
+    url: "https://www.cst.gov.sa/en/knowledge-center/user-awareness/catch-the-phish-1"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Banner and slides on this page (site updated 11/07/2026): official Saudi government websites end with .gov.sa; secure Saudi websites use HTTPS for encryption; the phisher tries to make a site look trustworthy with https; even if a link contains https, check its source and sender. The footer links my.gov.sa as the national platform"
+  - title: "Shopping and paying safely online"
+    publisher: "National Cyber Security Centre (NCSC), Royaume-Uni"
+    url: "https://www.ncsc.gov.uk/guidance/shopping-online-securely"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Scammers use deceptive website names that are easily mistaken for the genuine one; type the official website address into the address bar yourself; if unsure about a link you receive, don't click it"
+  - title: "Phishing scams"
+    publisher: "Scamwatch, National Anti-Scam Centre, Australie"
+    url: "https://www.scamwatch.gov.au/types-of-scams/phishing-scams"
+    lang: en
+    accessed: 2026-11-07
+    supports: "A website address slightly different from the usual one is a warning sign; don't click links in texts or emails; use the organisation's official app or contact details you find yourself"
+  - title: "Surfer sur le Web à l’aide de Safari sur l’iPhone"
+    publisher: "Apple"
+    url: "https://support.apple.com/fr-fr/guide/iphone/iph1fbef4daa/ios"
+    lang: fr
+    accessed: 2026-11-07
+    supports: "iPhone User Guide (iOS 27): touch and hold a link in Safari to preview it without opening the page; tapping the preview or Open opens it; tapping outside the preview closes it"
+  - title: "Qu'est-ce qu'une URL ?"
+    publisher: "MDN Web Docs (Mozilla)"
+    url: "https://developer.mozilla.org/fr/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_URL"
+    lang: fr
+    accessed: 2026-11-07
+    supports: "Parts of a URL: the scheme (https), then after :// the domain name of the server, then the path that starts with /"
+lastVerified: 2026-11-07
+ai:
+  assisted: true
+  model: "claude-opus-5-5"
+review:
+  status: in-review
+---
+
+## Pourquoi c'est important ?
+
+Vous recevez un lien dans un message, vous appuyez dessus, et il ouvre un site qui ressemble à celui de votre banque ou d'un service public. Mais c'est un faux site, créé par un escroc pour prendre votre mot de passe ou les données de votre carte. Dans cette leçon, vous apprenez à vérifier un lien avant de l'ouvrir.
+
+## L'idée
+
+Un lien est l'adresse d'une page sur internet. Sa partie la plus importante est le nom du site (domaine) : ce qui vient après `https://` jusqu'au premier `/`. Dans le lien `https://www.cst.gov.sa/ar/knowledge-center`, le nom du site est `www.cst.gov.sa`.
+
+L'escroc crée un site dont le nom ressemble au vrai : il change une lettre, ajoute un mot ou change la fin du nom. Donc :
+
+1. **Lisez le nom du site lettre par lettre,** surtout la fin.
+2. **Les noms des sites officiels du gouvernement saoudien se terminent par `.gov.sa`.** Si un message dit venir d'un organisme public saoudien et que le nom du site dans son lien ne se termine pas par `.gov.sa`, ne l'ouvrez pas.
+3. **`https` ne prouve pas que le site est vrai.** Un lien peut commencer par `https` : cela veut dire que la connexion au site est chiffrée, c'est-à-dire protégée contre l'espionnage. Mais cela ne veut pas dire que le propriétaire du site est honnête : les sites publics l'utilisent, et les escrocs aussi, pour faire croire que leur site est fiable.
+4. **Le plus sûr est de ne pas ouvrir un lien reçu dans un message inattendu.** Tapez vous-même le nom du site dans le navigateur, ou ouvrez l'application officielle de l'organisme.
+
+Comment savoir si le message lui-même est une arnaque ? Consultez la leçon « Repérer les messages frauduleux ».
+
+## Étape par étape
+
+### Lire le nom du site dans un lien
+
+1. `https://my.gov.sa`
+   Le nom du site est `my.gov.sa`. Il se termine par `.gov.sa` : c'est un site public.
+2. `https://my.gov.sa.example.com`
+   Le nom du site est `my.gov.sa.example.com`. Il commence par `my.gov.sa` mais se termine par `.example.com` : ce n'est pas un site public.
+3. `https://example.com/my.gov.sa`
+   Le nom du site est `example.com`. Ici, `my.gov.sa` vient après le premier `/` : cela ne fait pas partie du nom du site.
+
+Les noms qui contiennent `example` sont seulement des exemples.
+
+### Sur iPhone : afficher l'aperçu d'un lien avant de l'ouvrir
+
+Cette méthode fonctionne pour les liens dans les pages de Safari.
+
+1. Posez le doigt sur le lien et maintenez-le un instant sans le lever (appui prolongé).
+2. Un aperçu du lien apparaît sans que la page s'ouvre, avec un bouton Ouvrir. N'appuyez ni sur l'aperçu ni sur Ouvrir : les deux ouvrent la page.
+3. Ne jugez pas le site à son apparence dans l'aperçu : un faux site ressemble au vrai.
+4. Pour fermer l'aperçu et rester sur votre page, touchez l'écran en dehors de l'aperçu.
+
+Si votre téléphone est un Android, ou si vous ne savez pas comment voir un lien sans l'ouvrir, ne l'ouvrez pas. Tapez vous-même le nom du site ou ouvrez l'application officielle.
+
+## À vous de jouer
+
+Ouvrez un ancien message qui contient un lien, sans appuyer sur le lien. Lisez le nom du site, de ce qui suit `https://` jusqu'au premier `/` : se termine-t-il comme vous l'attendez pour l'organisme qui l'a envoyé ?
+
+## Testez-vous
+
+**1. Un message dit venir d'un organisme public saoudien. Lequel de ces liens peut être son site ?**
+
+- a. `https://my.gov.sa.example.com`
+- b. `https://my.gov.sa`
+- c. `https://example.com/my.gov.sa`
+
+<details>
+<summary>Afficher la réponse</summary>
+
+b. En (a), le nom du site se termine par `.example.com`, et en (c), le nom du site est `example.com`.
+
+</details>
+
+**2. Un lien commence par `https`. Cela veut-il dire que le site est vrai ?**
+
+<details>
+<summary>Afficher la réponse</summary>
+
+Non. `https` veut dire que la connexion est chiffrée, et les escrocs l'utilisent aussi. Lisez le nom du site lui-même.
+
+</details>
+
+**3. Un message qui dit venir de votre banque contient un lien pour mettre à jour vos informations. Que faire de plus sûr ?**
+
+<details>
+<summary>Afficher la réponse</summary>
+
+Ne pas ouvrir le lien : il peut mener à un faux site qui ressemble à celui de la banque. Ouvrez l'application officielle de la banque, ou tapez vous-même le nom de son site.
+
+</details>
+
+## À retenir
+
+- Lisez le nom du site dans un lien, de ce qui suit `https://` jusqu'au premier `/`, lettre par lettre et surtout la fin.
+- Les noms des sites publics saoudiens se terminent par `.gov.sa`, et `https` seul ne prouve pas qu'un site est vrai.
+- Le plus sûr : ne pas ouvrir un lien reçu dans un message inattendu. Tapez vous-même le nom du site ou ouvrez l'application officielle.

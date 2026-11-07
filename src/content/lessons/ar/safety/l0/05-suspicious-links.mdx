@@ -1,0 +1,135 @@
+---
+lessonId: safety-l0-05
+lang: ar
+sourceLang: ar
+topic: safety
+level: 0
+order: 5
+title: "الروابط المشبوهة والمواقع المزيفة"
+summary: "اقرأ اسم الموقع في الرابط قبل أن تفتحه، فالمحتال يصنع مواقع أسماؤها قريبة من الأسماء الحقيقية."
+objective: "أن تفحص الرابط قبل أن تفتحه."
+duration: 7
+prerequisites: []
+terms: ["الرابط (Link)", "اسم الموقع (Domain)", "التشفير و https"]
+sources:
+  - title: "حملة صد المتصيد 1"
+    publisher: "هيئة الاتصالات والفضاء والتقنية (CST)، السعودية"
+    url: "https://www.cst.gov.sa/ar/knowledge-center/user-awareness/catch-the-phish-1"
+    lang: ar
+    accessed: 2026-11-07
+    supports: "Banner and slides on this page (site updated 11/07/2026): official Saudi government websites end with .gov.sa; secure Saudi websites use HTTPS for encryption; the phisher tries to make a site look trustworthy with https; even if a link contains https, check its source and sender. The footer links my.gov.sa as the national platform"
+  - title: "Shopping and paying safely online"
+    publisher: "المركز الوطني للأمن السيبراني (NCSC)، المملكة المتحدة"
+    url: "https://www.ncsc.gov.uk/guidance/shopping-online-securely"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Scammers use deceptive website names that are easily mistaken for the genuine one; type the official website address into the address bar yourself; if unsure about a link you receive, don't click it"
+  - title: "Phishing scams"
+    publisher: "Scamwatch، المركز الوطني لمكافحة الاحتيال، أستراليا"
+    url: "https://www.scamwatch.gov.au/types-of-scams/phishing-scams"
+    lang: en
+    accessed: 2026-11-07
+    supports: "A website address slightly different from the usual one is a warning sign; don't click links in texts or emails; use the organisation's official app or contact details you find yourself"
+  - title: "تصفح الويب باستخدام سفاري على iPhone"
+    publisher: "Apple"
+    url: "https://support.apple.com/ar-sa/guide/iphone/iph1fbef4daa/ios"
+    lang: ar
+    accessed: 2026-11-07
+    supports: "iPhone User Guide (iOS 27): touch and hold a link in Safari to preview it without opening the page; tapping the preview or Open opens it; tapping outside the preview closes it"
+  - title: "What is a URL?"
+    publisher: "MDN Web Docs (Mozilla)"
+    url: "https://developer.mozilla.org/en-US/docs/Learn_web_development/Howto/Web_mechanics/What_is_a_URL"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Parts of a URL: the scheme (https), then after :// the domain name of the server, then the path that starts with /"
+lastVerified: 2026-11-07
+ai:
+  assisted: true
+  model: "claude-opus-5-5"
+review:
+  status: in-review
+---
+
+## لماذا يهمك هذا؟
+
+يصلك رابط في رسالة، فتضغط عليه، فيفتح موقعاً يشبه موقع بنكك أو موقع جهة حكومية. لكنه موقع مزيف صنعه محتال ليأخذ كلمة مرورك أو بيانات بطاقتك. في هذا الدرس تتعلم كيف تفحص الرابط قبل أن تفتحه.
+
+## الفكرة
+
+الرابط (Link) عنوان صفحة على الإنترنت. وأهم جزء فيه هو اسم الموقع (Domain)، وهو ما يأتي بعد `https://` حتى أول علامة `/`. ففي الرابط `https://www.cst.gov.sa/ar/knowledge-center` اسم الموقع هو `www.cst.gov.sa`.
+
+يصنع المحتال موقعاً اسمه قريب من الاسم الحقيقي: يغيّر حرفاً، أو يضيف كلمة، أو يغيّر نهاية الاسم. لذلك:
+
+1. **اقرأ اسم الموقع حرفاً حرفاً،** وخاصة نهايته.
+2. **أسماء المواقع الحكومية السعودية الرسمية تنتهي بـ `.gov.sa`.** فإذا قالت رسالة إنها من جهة حكومية سعودية، واسم الموقع في رابطها لا ينتهي بـ `.gov.sa`، فلا تفتحه.
+3. **`https` لا يثبت أن الموقع حقيقي.** قد يبدأ الرابط بـ `https`، وهذا يعني أن الاتصال بالموقع مشفّر، أي محمي من التنصت. لكنه لا يعني أن صاحب الموقع أمين: المواقع الحكومية تستخدمه، والمحتال يستخدمه أيضاً ليوهمك أن موقعه موثوق.
+4. **الأسلم ألا تفتح رابطاً وصلك في رسالة لم تتوقعها.** اكتب اسم الموقع بنفسك في المتصفح، أو افتح التطبيق الرسمي للجهة.
+
+وكيف تعرف أن الرسالة نفسها احتيال؟ راجع درس «كيف تكتشف رسائل الاحتيال».
+
+## خطوة بخطوة
+
+### اقرأ اسم الموقع في الرابط
+
+1. `https://my.gov.sa`
+   اسم الموقع `my.gov.sa`، وينتهي بـ `.gov.sa`، فهو موقع حكومي.
+2. `https://my.gov.sa.example.com`
+   اسم الموقع `my.gov.sa.example.com`. يبدأ بـ `my.gov.sa`، لكنه ينتهي بـ `.example.com`، فليس موقعاً حكومياً.
+3. `https://example.com/my.gov.sa`
+   اسم الموقع `example.com`. أما `my.gov.sa` فجاءت بعد أول `/`، فليست جزءاً من اسم الموقع.
+
+الأسماء التي فيها `example` كتبناها مثالاً فقط.
+
+### على آيفون: عاين الرابط قبل فتحه
+
+هذه الطريقة للروابط داخل صفحات سفاري.
+
+1. ضع إصبعك على الرابط، وأبقِه عليه لحظة دون أن ترفعه (لمس مطوّل).
+2. تظهر معاينة للرابط دون أن تُفتح الصفحة، ومعها زر «فتح». لا تضغط على المعاينة ولا على «فتح»، فكلاهما يفتح الصفحة.
+3. لا تحكم على الموقع من شكله في المعاينة، فالموقع المزيف يشبه الحقيقي.
+4. لتغلق المعاينة وتبقى في صفحتك، المس الشاشة بعيداً عنها.
+
+وإذا كان جوالك أندرويد، أو لم تعرف كيف ترى الرابط دون فتحه، فلا تفتحه، واكتب اسم الموقع بنفسك أو افتح التطبيق الرسمي.
+
+## جرّب بنفسك
+
+افتح رسالة قديمة فيها رابط، دون أن تضغط عليه. اقرأ اسم الموقع فيه، من بعد `https://` حتى أول `/`: هل ينتهي بما تتوقعه من الجهة التي أرسلته؟
+
+## اختبر نفسك
+
+**1. وصلتك رسالة تقول إنها من جهة حكومية سعودية. أي هذه الروابط يمكن أن يكون موقعها؟**
+
+- أ. `https://my.gov.sa.example.com`
+- ب. `https://my.gov.sa`
+- ج. `https://example.com/my.gov.sa`
+
+<details>
+<summary>اعرض الإجابة</summary>
+
+ب. في (أ) ينتهي اسم الموقع بـ `.example.com`، وفي (ج) اسم الموقع هو `example.com`.
+
+</details>
+
+**2. يبدأ الرابط بـ `https`. هل هذا يعني أن الموقع حقيقي؟**
+
+<details>
+<summary>اعرض الإجابة</summary>
+
+لا. `https` يعني أن الاتصال مشفّر، والمحتال يستخدمه أيضاً. اقرأ اسم الموقع نفسه.
+
+</details>
+
+**3. وصلتك رسالة تقول إنها من بنكك، وفيها رابط لتحديث بياناتك. ما الأسلم؟**
+
+<details>
+<summary>اعرض الإجابة</summary>
+
+ألا تفتح الرابط، فقد يقودك إلى موقع مزيف يشبه موقع البنك. افتح تطبيق البنك الرسمي، أو اكتب اسم موقعه بنفسك.
+
+</details>
+
+## الخلاصة
+
+- اقرأ اسم الموقع في الرابط، من بعد `https://` حتى أول `/`، حرفاً حرفاً وخاصة نهايته.
+- أسماء المواقع الحكومية السعودية تنتهي بـ `.gov.sa`، و`https` وحده لا يثبت أن الموقع حقيقي.
+- الأسلم: لا تفتح رابطاً من رسالة لم تتوقعها، بل اكتب اسم الموقع بنفسك أو افتح التطبيق الرسمي.
