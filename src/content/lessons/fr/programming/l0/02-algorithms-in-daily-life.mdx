@@ -1,0 +1,150 @@
+---
+lessonId: programming-l0-02
+lang: fr
+sourceLang: ar
+topic: programming
+level: 0
+order: 2
+title: "Des étapes dans l'ordre : les algorithmes au quotidien"
+summary: "Un algorithme est une suite d'étapes ordonnées et précises pour accomplir une tâche, et vous en suivez tous les jours."
+objective: "Écrire une tâche sous forme d'étapes ordonnées et précises."
+duration: 7
+prerequisites: ["basics-l0-01", "basics-l0-02", "basics-l0-03", "basics-l0-04", "programming-l0-01"]
+terms: ["algorithme", "bogue (bug)"]
+sources:
+  - title: "algorithm — Dictionary of Algorithms and Data Structures"
+    publisher: "National Institute of Standards and Technology (NIST), États-Unis"
+    url: "https://xlinux.nist.gov/dads/HTML/algorithm.html"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Entry modified 9 November 2020: an algorithm is a computable set of steps that achieves a desired result"
+  - title: "National curriculum in England: computing programmes of study"
+    publisher: "Ministère de l'Éducation (Department for Education), Angleterre"
+    url: "https://www.gov.uk/government/publications/national-curriculum-in-england-computing-programmes-of-study/national-curriculum-in-england-computing-programmes-of-study"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Key stage 1 (published 11 September 2013): algorithms are implemented as programs on digital devices; programs execute by following precise and unambiguous instructions"
+  - title: "How Algorithm Got Its Name"
+    publisher: "NASA Earth Observatory, États-Unis"
+    url: "https://science.nasa.gov/earth/earth-observatory/how-algorithm-got-its-name-91544"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Published 8 January 2018: Muhammad ibn Musa al-Khwarizmi was a 9th-century mathematician from Khwarezm; the Latin form of his name, 'algoritmi', gave English the word algorithm"
+  - title: "What is an algorithm? — Algorithms (KS3)"
+    publisher: "BBC Bitesize, BBC (Royaume-Uni)"
+    url: "https://www.bbc.co.uk/bitesize/guides/zpp49j6/revision/1"
+    lang: en
+    accessed: 2026-11-07
+    supports: "An algorithm is a plan of step-by-step instructions to solve a problem; if you can make a cup of tea, prepare a meal or tie shoelaces, you already follow algorithms; each instruction and its order are planned; algorithms are often the starting point for a program. 'Making a plan': an algorithm must be clear, with a starting point, a finishing point and clear instructions in between"
+  - title: "Algorithms"
+    publisher: "BBC Bitesize, BBC (Royaume-Uni)"
+    url: "https://www.bbc.co.uk/bitesize/articles/zx4ybqt"
+    lang: en
+    accessed: 2026-11-07
+    supports: "'Types of algorithms': algorithms help with tasks such as finding your way to an unfamiliar place with directions. 'Using algorithms to check for errors in a program': a program can give an outcome you did not want because of a mistake, called a bug; one way to find it is to go back to the algorithm and check its steps and their order"
+  - title: "How are computer programs constructed?"
+    publisher: "BBC Bitesize, BBC (Royaume-Uni)"
+    url: "https://www.bbc.co.uk/bitesize/topics/zs7s4wx/articles/z23q7ty"
+    lang: en
+    accessed: 2026-11-07
+    supports: "'What is a computer program?': computers only do what people tell them. 'Sequences': steps in the wrong order give an outcome you did not want. 'Computers and sequences': a computer can't tell when a step is out of order and carries on; in a drinks factory, computer-controlled machines fill the bottles, then put the lids on; check the algorithm, then the code"
+lastVerified: 2026-11-07
+ai:
+  assisted: true
+  model: "claude-opus-5-5"
+review:
+  status: in-review
+---
+
+## Pourquoi c'est important ?
+
+Un invité qui ne connaît pas votre maison vous appelle, et vous lui décrivez le chemin : « Allez tout droit, puis tournez à droite à la mosquée, puis… » Si vous oubliez une étape, ou si vous en placez une avant une autre, votre invité se perd. Ce que vous venez de décrire est un algorithme. Dans cette leçon, vous apprenez à en écrire un correctement.
+
+## L'idée
+
+Un algorithme est un plan d'action : des étapes que l'on écrit dans l'ordre, pour accomplir une tâche ou résoudre un problème.
+
+Vous suivez des algorithmes tous les jours : quand vous préparez une tasse de thé, un repas, ou quand vous nouez vos lacets.
+
+Le mot a une histoire. Le mot anglais « algorithm » (algorithme) vient du nom du mathématicien Muhammad ibn Musa al-Khwarizmi, qui a vécu au IXe siècle. Son nom a été écrit en latin « algoritmi », et le mot anglais en est issu.
+
+Avant d'écrire un programme, le programmeur commence souvent par l'algorithme : il fixe les étapes et leur ordre, puis il les écrit dans un langage de programmation, un langage que l'ordinateur comprend.
+
+Un bon algorithme a trois qualités :
+
+1. **Un début et une fin clairs.**
+2. **Des étapes précises et claires,** sans double sens.
+3. **Le bon ordre.** Si vous déplacez une étape, le résultat risque de ne pas être celui que vous vouliez.
+
+L'ordre compte encore plus avec un ordinateur. Il exécute les étapes telles qu'elles ont été écrites. Si une étape n'est pas à sa place, il ne s'en rend pas compte tout seul, et il continue.
+
+## Étape par étape
+
+### Écrire l'algorithme d'une tasse de thé
+
+Partez de la tâche telle que vous la diriez d'habitude : « Fais une tasse de thé. » Une personne comprend cette phrase, mais elle ne dit ni par quoi commencer, ni quand c'est fini.
+
+Écrivez-la en étapes ordonnées et précises :
+
+1. Faites chauffer de quoi remplir une tasse d'eau, jusqu'à ébullition.
+2. Mettez un sachet de thé dans la tasse.
+3. Versez l'eau bouillante dans la tasse jusqu'à ce qu'elle soit pleine.
+4. Attendez 3 minutes.
+5. Retirez le sachet de thé de la tasse.
+
+Puis vérifiez-la :
+
+- **Le début et la fin sont-ils clairs ?** On commence par chauffer l'eau et on termine en retirant le sachet.
+- **Chaque étape est-elle précise ?** Si vous écriviez « faites chauffer de l'eau », la personne ne saurait pas quelle quantité chauffer. Si vous écriviez « attendez un peu », elle ne saurait pas combien de temps attendre. « De quoi remplir une tasse » et « attendez 3 minutes » sont précis.
+- **L'ordre est-il le bon ?** Si vous placiez l'étape 3 avant l'étape 1, vous verseriez une eau qui n'a pas encore bouilli.
+
+### L'ordre dans une usine
+
+Dans une usine de boissons, des ordinateurs commandent des machines qui remplissent les bouteilles, puis les ferment. Si le programme est écrit dans le mauvais ordre et que la machine ferme une bouteille avant de la remplir, l'ordinateur ne saura pas que c'est une erreur, et il continuera.
+
+Il arrive qu'un programme donne un résultat que vous ne vouliez pas, à cause d'une erreur qu'il contient. Cette erreur s'appelle un bogue (en anglais, bug). Quand cela arrive, revenez à l'algorithme qui vous a servi de plan : avez-vous oublié une étape ? Avez-vous mis une étape au mauvais endroit ?
+
+## À vous de jouer
+
+Choisissez une tâche simple de tous les jours, comme régler une alarme sur votre téléphone. Écrivez-la en 4 à 6 étapes ordonnées et précises.
+
+Donnez ensuite vos étapes à un membre de votre famille, et demandez-lui de les suivre exactement comme elles sont écrites, sans rien ajouter de lui-même. Si personne n'est avec vous, suivez-les vous-même, mot pour mot, comme un ordinateur. Les étapes ont-elles permis d'accomplir la tâche ? Sinon, quelle étape faut-il corriger ?
+
+## Testez-vous
+
+**1. Lequel de ces textes est un algorithme ?**
+
+- A. « Fais une tasse de thé. »
+- B. « Fais chauffer de quoi remplir une tasse d'eau jusqu'à ébullition, puis mets un sachet de thé dans la tasse, puis verse l'eau, puis attends 3 minutes, puis retire le sachet. »
+- C. « Le thé est une boisson chaude. »
+
+<details>
+<summary>Afficher la réponse</summary>
+
+B. Il contient des étapes ordonnées et précises, avec un début et une fin. A est une tâche sans étapes, et C est une information, pas des étapes.
+
+</details>
+
+**2. « Attends un peu, puis retire le sachet. » Quel est le problème de ces instructions, et comment le corriger ?**
+
+<details>
+<summary>Afficher la réponse</summary>
+
+« Un peu » n'est pas précis, et chacun peut le comprendre différemment. Écrivez une durée exacte, par exemple « attends 3 minutes ».
+
+</details>
+
+**3. Dans le programme de l'usine, l'étape de fermeture est venue avant l'étape de remplissage. L'ordinateur peut-il se rendre compte tout seul que l'ordre est faux ?**
+
+<details>
+<summary>Afficher la réponse</summary>
+
+Non. L'ordinateur exécute ce qu'on a écrit pour lui, et il ne peut pas savoir tout seul que l'ordre est faux. C'est pourquoi le programmeur vérifie l'ordre des étapes dans l'algorithme.
+
+</details>
+
+## À retenir
+
+- Un algorithme est une suite d'étapes ordonnées pour accomplir une tâche, et vous en suivez tous les jours.
+- Un bon algorithme a un début et une fin, des étapes précises et claires, et le bon ordre.
+- Un ordinateur exécute ce qu'on a écrit pour lui et ne voit pas seul qu'un ordre est faux : c'est pourquoi le programmeur planifie avec un algorithme et le vérifie.
