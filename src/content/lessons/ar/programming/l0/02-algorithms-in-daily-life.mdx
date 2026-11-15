@@ -1,0 +1,150 @@
+---
+lessonId: programming-l0-02
+lang: ar
+sourceLang: ar
+topic: programming
+level: 0
+order: 2
+title: "خطوات بالترتيب: الخوارزميات في حياتك"
+summary: "الخوارزمية خطوات مرتبة ودقيقة لإنجاز مهمة، وأنت تتبع خوارزميات كل يوم."
+objective: "أن تكتب مهمة في صورة خطوات مرتبة ودقيقة."
+duration: 7
+prerequisites: ["basics-l0-01", "basics-l0-02", "basics-l0-03", "basics-l0-04", "programming-l0-01"]
+terms: ["الخوارزمية (Algorithm)", "الخطأ البرمجي (Bug)"]
+sources:
+  - title: "algorithm — Dictionary of Algorithms and Data Structures"
+    publisher: "المعهد الوطني للمعايير والتقنية (NIST)، الولايات المتحدة"
+    url: "https://xlinux.nist.gov/dads/HTML/algorithm.html"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Entry modified 9 November 2020: an algorithm is a computable set of steps that achieves a desired result"
+  - title: "National curriculum in England: computing programmes of study"
+    publisher: "وزارة التعليم (Department for Education)، إنجلترا"
+    url: "https://www.gov.uk/government/publications/national-curriculum-in-england-computing-programmes-of-study/national-curriculum-in-england-computing-programmes-of-study"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Key stage 1 (published 11 September 2013): algorithms are implemented as programs on digital devices; programs execute by following precise and unambiguous instructions"
+  - title: "How Algorithm Got Its Name"
+    publisher: "NASA Earth Observatory، الولايات المتحدة"
+    url: "https://science.nasa.gov/earth/earth-observatory/how-algorithm-got-its-name-91544"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Published 8 January 2018: Muhammad ibn Musa al-Khwarizmi was a 9th-century mathematician from Khwarezm; the Latin form of his name, 'algoritmi', gave English the word algorithm"
+  - title: "What is an algorithm? — Algorithms (KS3)"
+    publisher: "BBC Bitesize، هيئة الإذاعة البريطانية"
+    url: "https://www.bbc.co.uk/bitesize/guides/zpp49j6/revision/1"
+    lang: en
+    accessed: 2026-11-07
+    supports: "An algorithm is a plan of step-by-step instructions to solve a problem; if you can make a cup of tea, prepare a meal or tie shoelaces, you already follow algorithms; each instruction and its order are planned; algorithms are often the starting point for a program. 'Making a plan': an algorithm must be clear, with a starting point, a finishing point and clear instructions in between"
+  - title: "Algorithms"
+    publisher: "BBC Bitesize، هيئة الإذاعة البريطانية"
+    url: "https://www.bbc.co.uk/bitesize/articles/zx4ybqt"
+    lang: en
+    accessed: 2026-11-07
+    supports: "'Types of algorithms': algorithms help with tasks such as finding your way to an unfamiliar place with directions. 'Using algorithms to check for errors in a program': a program can give an outcome you did not want because of a mistake, called a bug; one way to find it is to go back to the algorithm and check its steps and their order"
+  - title: "How are computer programs constructed?"
+    publisher: "BBC Bitesize، هيئة الإذاعة البريطانية"
+    url: "https://www.bbc.co.uk/bitesize/topics/zs7s4wx/articles/z23q7ty"
+    lang: en
+    accessed: 2026-11-07
+    supports: "'What is a computer program?': computers only do what people tell them. 'Sequences': steps in the wrong order give an outcome you did not want. 'Computers and sequences': a computer can't tell when a step is out of order and carries on; in a drinks factory, computer-controlled machines fill the bottles, then put the lids on; check the algorithm, then the code"
+lastVerified: 2026-11-07
+ai:
+  assisted: true
+  model: "claude-opus-5-5"
+review:
+  status: in-review
+---
+
+## لماذا يهمك هذا؟
+
+يتصل بك ضيف لا يعرف بيتك، فتصف له الطريق: «امشِ مستقيماً، ثم انعطف يميناً عند المسجد، ثم…». إن نسيت خطوة، أو قدّمت خطوة على أخرى، ضاع الضيف. ما وصفته للتو خوارزمية (Algorithm)، وفي هذا الدرس تتعلم كيف تكتبها جيداً.
+
+## الفكرة
+
+الخوارزمية خطة للعمل: خطوات تكتبها بالترتيب، لتنجز بها مهمة أو تحل مشكلة.
+
+وأنت تتبع خوارزميات كل يوم، حين تُعدّ كوب شاي، أو تحضّر وجبة، أو تربط رباط حذائك.
+
+وللكلمة قصة: الكلمة الإنجليزية algorithm، ومعناها الخوارزمية، جاءت من اسم عالم الرياضيات محمد بن موسى الخوارزمي، الذي عاش في القرن التاسع الميلادي. فقد كُتب اسمه باللاتينية «algoritmi»، ومنه جاءت الكلمة.
+
+وقبل أن يكتب المبرمج برنامجاً، يبدأ غالباً بالخوارزمية: يحدد الخطوات وترتيبها، ثم يكتبها بلغة برمجة، أي لغة يفهمها الحاسب.
+
+الخوارزمية الجيدة فيها ثلاثة أشياء:
+
+1. **بداية ونهاية واضحتان.**
+2. **خطوات دقيقة وواضحة،** لا تحتمل معنيين.
+3. **ترتيب صحيح.** فلو بدّلت مكان خطوة، قد تخرج النتيجة على غير ما أردت.
+
+والترتيب أهم مع الحاسب. فهو ينفذ الخطوات كما كُتبت له، وإن كانت خطوة في غير مكانها فلن يعرف ذلك وحده، وسيستمر في العمل.
+
+## خطوة بخطوة
+
+### اكتب خوارزمية كوب شاي
+
+ابدأ بالمهمة كما تقولها عادة: «اعمل كوب شاي». هذه جملة يفهمها الإنسان، لكنها لا تقول ماذا تفعل أولاً، ولا متى تنتهي.
+
+اكتبها خطوات مرتبة ودقيقة:
+
+1. سخّن ماءً يكفي لملء كوب واحد، حتى يغلي.
+2. ضع كيس شاي واحداً في الكوب.
+3. اسكب الماء المغلي في الكوب حتى يمتلئ.
+4. انتظر 3 دقائق.
+5. أخرج كيس الشاي من الكوب.
+
+ثم افحصها:
+
+- **هل البداية والنهاية واضحتان؟** تبدأ بتسخين الماء، وتنتهي حين تُخرج الكيس.
+- **هل كل خطوة دقيقة؟** لو كتبت «سخّن ماءً» لما عرف من ينفذها كم ماءً يسخّن. ولو كتبت «انتظر قليلاً» لما عرف كم ينتظر. أما «ماءً يكفي لملء كوب واحد» و«انتظر 3 دقائق» فدقيقتان.
+- **هل الترتيب صحيح؟** لو قدّمت الخطوة 3 على الخطوة 1، لسكبت ماءً لم يغلِ بعد.
+
+### الترتيب في مصنع
+
+في مصنع مشروبات، تتحكم حواسيب في آلات تملأ القوارير ثم تغلقها. إذا كُتب البرنامج بترتيب خاطئ، فأغلقت الآلة القارورة قبل أن تملأها، فلن يعرف الحاسب أن هذا خطأ، وسيستمر في العمل.
+
+وأحياناً يعطي البرنامج نتيجة لا تريدها بسبب خطأ فيه. هذا الخطأ اسمه الخطأ البرمجي (Bug). فإذا حدث، فارجع إلى الخوارزمية التي خططت بها: هل نسيت خطوة؟ هل وضعت خطوة في غير مكانها؟
+
+## جرّب بنفسك
+
+اختر مهمة يومية بسيطة، مثل ضبط منبّه على جوالك. اكتبها في 4 إلى 6 خطوات مرتبة ودقيقة.
+
+ثم أعطها لأحد أفراد أسرتك، واطلب منه أن ينفذها كما كتبتها بالضبط، دون أن يضيف شيئاً من عنده. وإن لم يكن معك أحد، فنفّذها أنت حرفياً، كأنك حاسب. هل أنجزت الخطوات المهمة؟ إن لم تنجزها، فأي خطوة تحتاج إلى تعديل؟
+
+## اختبر نفسك
+
+**1. أيّ هذه خوارزمية؟**
+
+- أ. «اعمل كوب شاي».
+- ب. «سخّن ماءً يكفي لملء كوب حتى يغلي، ثم ضع كيس شاي في الكوب، ثم اسكب الماء فيه، ثم انتظر 3 دقائق، ثم أخرج الكيس».
+- ج. «الشاي مشروب ساخن».
+
+<details>
+<summary>اعرض الإجابة</summary>
+
+ب. فيها خطوات مرتبة ودقيقة، لها بداية ونهاية. أما (أ) فمهمة بلا خطوات، و(ج) معلومة وليست خطوات.
+
+</details>
+
+**2. «انتظر قليلاً، ثم أخرج الكيس». ما المشكلة في هذه التعليمات، وكيف تصلحها؟**
+
+<details>
+<summary>اعرض الإجابة</summary>
+
+«قليلاً» غير دقيقة، وقد يفهمها كل شخص بطريقة مختلفة. اكتب مدة محددة، مثل «انتظر 3 دقائق».
+
+</details>
+
+**3. في برنامج المصنع، جاءت خطوة الإغلاق قبل خطوة الملء. هل يعرف الحاسب وحده أن الترتيب خاطئ؟**
+
+<details>
+<summary>اعرض الإجابة</summary>
+
+لا. الحاسب ينفذ ما كُتب له، ولا يعرف وحده أن الترتيب خاطئ. لذلك يتحقق المبرمج من ترتيب الخطوات في الخوارزمية.
+
+</details>
+
+## الخلاصة
+
+- الخوارزمية خطوات مرتبة لإنجاز مهمة، وأنت تتبع خوارزميات كل يوم.
+- الخوارزمية الجيدة لها بداية ونهاية، وخطواتها دقيقة وواضحة، وترتيبها صحيح.
+- الحاسب ينفذ ما كُتب له، ولا يعرف وحده أن الترتيب خاطئ، لذلك يخطط المبرمج بالخوارزمية ويتحقق منها.
