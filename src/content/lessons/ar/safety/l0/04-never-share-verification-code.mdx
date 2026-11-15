@@ -1,0 +1,156 @@
+---
+lessonId: safety-l0-04
+lang: ar
+sourceLang: ar
+topic: safety
+level: 0
+order: 4
+title: "لا تشارك رمز التحقق أبداً"
+summary: "رمز التحقق لك وحدك، ومن يطلبه منك محتال حتى لو قال إنه من البنك."
+objective: "أن تشرح لماذا لا تعطي رمز التحقق لأحد أبداً، حتى لمن يقول إنه من البنك."
+duration: 8
+prerequisites: []
+terms: ["رمز التحقق (Verification code)", "رمز الوصول المؤقت (OTP)", "رمز التسجيل في واتساب (Registration code)", "التحقق بخطوتين (Two-step verification)"]
+sources:
+  - title: "من فعّل سلم — أدوات الحماية"
+    publisher: "الهيئة الوطنية للأمن السيبراني (NCA)، السعودية"
+    url: "https://cdn.nca.gov.sa/api/files/public/upload/b5434eff-8401-455a-ae0e-d63463155c64_Booklet_2024_October-.pdf"
+    lang: ar
+    accessed: 2026-11-07
+    supports: "Booklet from October 2024 (per its file name and metadata), p. 5: do not share the one-time code (OTP), it is yours alone; sharing it can lead to financial loss, exposed data, a hacked account and identity theft"
+  - title: "البنك المركزي السعودي يتخذ عدداً من الإجراءات الاحترازية المؤقتة لحماية عملاء البنوك من الاحتيال المالي"
+    publisher: "البنك المركزي السعودي (ساما)"
+    url: "https://www.sama.gov.sa/ar-sa/MediaCenter/News/Pages/news-752.aspx"
+    lang: ar
+    accessed: 2026-11-07
+    supports: "Scammers convince people they are an official body, a company or a trusted person to get login details and verification codes, then make fraudulent transactions; never share PINs or verification codes with anyone"
+  - title: "What's a verification code and why would someone ask me for it?"
+    publisher: "لجنة التجارة الفيدرالية (FTC)، الولايات المتحدة"
+    url: "https://consumer.ftc.gov/consumer-alerts/2024/03/whats-verification-code-why-would-someone-ask-me-it"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Published 7 March 2024: a verification code is sent by text or email when you log in; password and code work together; scammers pose as someone you trust, may know things about you, and claim a problem with your account; with the code they can move your money; never give it to anyone; anyone who asks for it is a scammer; hang up and contact your bank through a number you trust, e.g. on your statement or in its app, not the number the caller gave you"
+  - title: "Phishing scams"
+    publisher: "Scamwatch، المركز الوطني لمكافحة الاحتيال، أستراليا"
+    url: "https://www.scamwatch.gov.au/types-of-scams/phishing-scams"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Never share passwords or one-time codes with anyone who contacts you unexpectedly, even if they claim to be from your bank; scammers can make calls and texts look like they come from your bank; contact people using details you find yourself"
+  - title: "كيفية استرداد حساب تعرض للاختراق"
+    publisher: "WhatsApp"
+    url: "https://faq.whatsapp.com/1131652977717250/?locale=ar"
+    lang: ar
+    accessed: 2026-11-07
+    supports: "Never share the 6-digit registration code with anyone, not even friends or family; whoever takes over the account may impersonate you in chats and groups (that the code lets someone register your number elsewhere is inferred from the recovery steps); re-registering with the code logs out every other device; you may be asked for the two-step verification PIN"
+  - title: "حول ميزة التحقق بخطوتين"
+    publisher: "WhatsApp"
+    url: "https://faq.whatsapp.com/1278661612895630/?locale=ar"
+    lang: ar
+    accessed: 2026-11-07
+    supports: "Two-step verification is optional extra security that protects the account from unauthorized access with two different methods, such as an SMS plus a password"
+  - title: "كيفية إدارة إعدادات التحقق بخطوتين"
+    publisher: "WhatsApp"
+    url: "https://faq.whatsapp.com/1920866721452534/?locale=ar"
+    lang: ar
+    accessed: 2026-11-07
+    supports: "Steps (Android and iOS tabs): ⋮ > Settings > Account > Two-step verification (Android) or You > Account > Two-step verification (iPhone); turn on; create a strong password and confirm it; enter an email address you can access or skip; trust this device or skip; WhatsApp is replacing the 6-digit PIN with a password"
+  - title: "تعذّر تذكر كلمة السر"
+    publisher: "WhatsApp"
+    url: "https://faq.whatsapp.com/2183055648554771/?locale=ar"
+    lang: ar
+    accessed: 2026-11-07
+    supports: "If you forget the password you can verify another way (email, SMS or voice call); if you cannot, you can reset the account after a few days, which cannot be undone and can delete messages; while signed in you can create a new password without the old one; a password needs at least 8 characters with at least one letter and one number"
+lastVerified: 2026-11-07
+platforms: [android, ios]
+ai:
+  assisted: true
+  model: "claude-opus-5-5"
+review:
+  status: in-review
+---
+
+## لماذا يهمك هذا؟
+
+يتصل بك شخص يقول إنه من بنكك: «هناك مشكلة في حسابك، وأرسلنا لك رمزاً، اقرأه لي لنحلّها». أو تصلك رسالة واتساب من رقم صديقك: «وصلك رمز مني بالخطأ، أرسله لي». في الحالتين يريد المحتال رمز التحقق، وفي هذا الدرس تعرف لماذا لا تعطيه لأحد أبداً، وتحمي حسابك في واتساب.
+
+## الفكرة
+
+رمز التحقق (Verification code) رقم يصلك في رسالة نصية أو بريد إلكتروني عندما تدخل إلى حسابك، ويُسمى أيضاً رمز الوصول المؤقت (OTP). كلمة المرور والرمز يعملان معاً، فمن يعرف واحداً منهما فقط لا يستطيع الدخول.
+
+وقد يكون المحتال عرف كلمة مرورك أو بعض بياناتك، فلا ينقصه إلا الرمز. لذلك يحاول أن يجعلك تقرأه له. ومن يحصل على رمزك قد يدخل حسابك، ويأخذ مالك أو بياناتك، وينتحل شخصيتك.
+
+القاعدة بسيطة: **الرمز لك وحدك.** من يطلبه منك محتال، حتى لو قال إنه من البنك أو جهة رسمية، وحتى لو جاءك الطلب من رقم صديق أو قريب.
+
+وفي واتساب يصلك رمز التسجيل (Registration code)، وهو من 6 أرقام، في رسالة نصية أو مكالمة عند تسجيل رقمك على جوال. من يحصل عليه قد يأخذ حسابك، ثم يراسل أصدقاءك ومجموعاتك باسمك.
+
+## خطوة بخطوة
+
+### إذا طلب منك أحد الرمز
+
+1. لا تقرأه ولا ترسله. أنهِ المكالمة، أو توقف عن الرد.
+2. إذا قلقت على حسابك، فاتصل بالبنك بنفسك على رقم تثق به، مثل الرقم المكتوب على كشف حسابك أو في تطبيق البنك. لا تتصل بالرقم الذي أعطاك إياه المتصل، ولا تطمئن لظهور اسم البنك على الشاشة، فالمحتال يستطيع أن يجعل مكالمته أو رسالته تبدو من البنك.
+3. إذا جاء الطلب من رقم صديق، فاتصل به أنت على رقمه المحفوظ عندك لتتأكد.
+
+### فعّل التحقق بخطوتين في واتساب
+
+التحقق بخطوتين (Two-step verification) يحمي حسابك بطريقتين معاً: الرمز الذي يصلك، وكلمة سر تختارها أنت. فيصعب على من أخذ رمزك أن يسجّل رقمك على جوال آخر. لكنه حماية إضافية، فلا تعطِ الرمز لأحد حتى بعد تفعيله.
+
+وكلمة السر هنا هي كلمة المرور نفسها، وهكذا يسميها واتساب.
+
+**أندرويد:**
+
+1. افتح واتساب، واضغط على النقاط الثلاث ⋮، ثم «الإعدادات» > «الحساب» > «التحقق بخطوتين».
+2. اضغط «تشغيل التحقق بخطوتين».
+3. أنشئ كلمة سر قوية تتذكرها، من 8 أحرف على الأقل وفيها حرف ورقم على الأقل، ثم اكتبها مرة أخرى للتأكيد.
+4. أدخل بريداً إلكترونياً تستطيع فتحه واضغط «التالي»، أو اضغط «تخطي».
+5. اضغط «الوثوق بهذا الجهاز» أو «تخطي».
+
+**آيفون:**
+
+1. افتح واتساب، واضغط على «أنت»، ثم «الحساب» > «التحقق بخطوتين».
+2. أكمل الخطوات من 2 إلى 5 كما في أندرويد.
+
+إذا نسيت كلمة السر عند الدخول، يمكنك أن تتحقق بطريقة أخرى، مثل رمز يصلك على بريدك أو في رسالة نصية. وإن لم تستطع، فقد تنتظر بضعة أيام لتعيد تعيين حسابك، وقد تُحذف بعض رسائلك.
+
+يستبدل واتساب رقم التعريف الشخصي (PIN)، وهو رقم سري من 6 أرقام، بكلمة سر. فإذا ظهر لك «رقم التعريف الشخصي» بدل «كلمة السر»، فاتبع ما يظهر على شاشتك.
+
+> كلمة سر التحقق بخطوتين مثل رمز التحقق: لا تعطها لأحد.
+
+## جرّب بنفسك
+
+افتح واتساب الآن، وفعّل التحقق بخطوتين بالخطوات السابقة. وإذا وجدته مفعّلاً ولم تتذكر كلمة السر، فأنشئ كلمة سر جديدة وأنت داخل حسابك، فلا تحتاج إلى القديمة.
+
+## اختبر نفسك
+
+**1. اتصل بك شخص يقول إنه من بنكك، وطلب الرمز الذي وصلك «لإيقاف عملية مشبوهة». ماذا تفعل؟**
+
+<details>
+<summary>اعرض الإجابة</summary>
+
+أنهي المكالمة ولا أعطيه الرمز، ثم أتصل بالبنك بنفسي على رقم أثق به، لا على رقم يعطيني إياه المتصل. من يطلب رمز التحقق محتال.
+
+</details>
+
+**2. صديقك على واتساب يقول: «وصلك رمز مني بالخطأ، أرسله لي». لماذا لا ترسله؟**
+
+<details>
+<summary>اعرض الإجابة</summary>
+
+لأن من يحصل على هذا الرمز قد يأخذ حسابي. وقد لا يكون صديقي هو من يكتب، فربما أخذ أحدٌ حسابه. وواتساب نفسه ينصح ألا أعطي هذا الرمز لأحد، ولا حتى لأهلي وأصدقائي.
+
+</details>
+
+**3. ماذا يضيف التحقق بخطوتين إلى حسابك في واتساب؟**
+
+<details>
+<summary>اعرض الإجابة</summary>
+
+كلمة سر أختارها أنا، فيُحمى حسابي بالرمز وكلمة السر معاً. لكني لا أعطي الرمز لأحد حتى بعد تفعيله.
+
+</details>
+
+## الخلاصة
+
+- رمز التحقق لك وحدك. من يطلبه منك محتال، حتى لو قال إنه من البنك.
+- من يحصل على رمزك قد يدخل حسابك ويأخذ مالك أو بياناتك وينتحل شخصيتك.
+- فعّل التحقق بخطوتين في واتساب، واختر كلمة سر تتذكرها، ولا تعطها لأحد.
