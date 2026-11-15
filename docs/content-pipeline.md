@@ -215,6 +215,8 @@ to it.
     as a Cloudflare secret.
   - Fix flow: issue → Claude fixes in a branch → a review card in Telegram
     for the changed version only → merge.
+  - Implementation, privacy notes and setup: [`error-reports.md`](error-reports.md).
+    The fix flow is the `fix-lesson` skill.
 
 ## 4. How Claude runs it
 

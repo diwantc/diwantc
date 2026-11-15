@@ -1,0 +1,94 @@
+---
+lessonId: programming-l0-99
+lang: en
+sourceLang: ar
+topic: programming
+level: 0
+order: 99
+title: "Code runner demo lesson"
+summary: "Test file only, not a real lesson."
+objective: "See how the code runner works inside a lesson."
+duration: 6
+prerequisites: []
+terms: ["test"]
+sources:
+  - title: "Example Domain"
+    publisher: "IANA"
+    url: "https://example.com/"
+    lang: en
+    accessed: 2026-11-07
+    supports: "Placeholder source for layout tests"
+lastVerified: 2026-11-07
+ai:
+  assisted: true
+  model: "fixture"
+review:
+  status: draft
+---
+
+## Why it matters
+
+This is placeholder text to test the code runner. It holds no real information and is never published.
+
+## The idea
+
+Press Run under each example, then change the code and run it again.
+
+<CodeRunner
+  title="Example 1: a working program"
+  code={`
+    let name = "Sara";
+    let count = 5;
+    console.log("Hello, " + name + "!");
+    console.log("Messages:", count);
+    console.log([1, "two", { ok: true }], ["أحمد", "سارة"]);
+    console.warn("console.warn");
+  `}
+/>
+
+## Step by step
+
+<CodeRunner
+  title="Example 2: a wrong name"
+  code={`
+    let message = "Hi";
+    console.log(mesage);
+  `}
+/>
+
+<CodeRunner
+  title="Example 3: a typing mistake"
+  code={`
+    console.log("ok");
+    console.log("Hi);
+  `}
+/>
+
+## Try it
+
+<CodeRunner
+  title="Example 4: a loop that never ends"
+  code={`
+    let i = 0;
+    while (true) {
+      i = i + 1;
+    }
+  `}
+/>
+
+## Check yourself
+
+**1. A test question?**
+
+<details>
+<summary>Show the answer</summary>
+
+A test answer.
+
+</details>
+
+## Key points
+
+- First point.
+- Second point.
+- Third point.

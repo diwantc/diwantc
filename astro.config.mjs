@@ -19,6 +19,8 @@ export default defineConfig({
   integrations: [
     mdx(),
     sitemap({
+      // Report forms (/<lang>/report/<lessonId>/) are not content pages.
+      filter: (page) => !/\/(ar|en|fr)\/report\//.test(new URL(page).pathname),
       i18n: {
         defaultLocale: 'ar',
         locales: { ar: 'ar', en: 'en', fr: 'fr' },
