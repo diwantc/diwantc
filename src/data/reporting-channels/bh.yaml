@@ -1,0 +1,70 @@
+# Official reporting channels — Bahrain.
+# Every channel needs an official source opened by the person who adds or
+# re-checks it. Re-verify every 3 months (scripts/reverify.mjs).
+country: bh
+order: 5
+name:
+  ar: "البحرين"
+  en: "Bahrain"
+  fr: "Bahreïn"
+channels:
+  - id: hotline-992
+    type: phone
+    contact: "992"
+    name:
+      ar: "الخط الساخن لمكافحة الفساد والأمن الاقتصادي والإلكتروني"
+      en: "Anti-Corruption and Economic and Electronic Security hotline"
+      fr: "Ligne directe de lutte contre la corruption et de sécurité économique et électronique"
+    use:
+      ar: "للإبلاغ عن الجرائم الاقتصادية والإلكترونية."
+      en: "Report economic and electronic crimes."
+      fr: "Pour signaler les crimes économiques et électroniques."
+    source:
+      title: "Directory of Emergency Hotline Numbers"
+      publisher:
+        ar: "البوابة الوطنية لمملكة البحرين (bahrain.bh)"
+        en: "National Portal of Bahrain (bahrain.bh)"
+        fr: "Portail national de Bahreïn (bahrain.bh)"
+      url: "https://www.bahrain.bh/wps/portal/en/BNP/DirectoryOfEmergencyHotlineNumbers"
+      lang: en
+    lastVerified: 2026-11-07
+  - id: moi-acees
+    type: phone
+    contact: "+973 17390000"
+    name:
+      ar: "الإدارة العامة لمكافحة الفساد والأمن الاقتصادي والإلكتروني"
+      en: "General Directorate of Anti-Corruption, Economic and Electronic Security"
+      fr: "Direction générale de la lutte contre la corruption et de la sécurité économique et électronique"
+    use:
+      ar: "تستقبل قضايا الفساد والجرائم الاقتصادية والإلكترونية. وبريدها: info@interior.gov.bh"
+      en: "Receives corruption, economic and cybercrime cases. Email: info@interior.gov.bh"
+      fr: "Reçoit les affaires de corruption, de crimes économiques et de cybercriminalité. E-mail : info@interior.gov.bh"
+    source:
+      title: "General Directorate of Anti-Corruption, Economic and Electronic Security"
+      publisher:
+        ar: "وزارة الداخلية البحرينية"
+        en: "Ministry of Interior, Bahrain"
+        fr: "Ministère de l'Intérieur, Bahreïn"
+      url: "https://www.interior.gov.bh/en/moi-sectors-gd-for-combating-corruption-economic-and-cyber-security"
+      lang: en
+    lastVerified: 2026-11-07
+  - id: cbb-consumer-protection
+    type: phone
+    contact: "+973 17547789"
+    name:
+      ar: "مكتب حماية المستهلك — مصرف البحرين المركزي"
+      en: "Consumer Protection office — Central Bank of Bahrain"
+      fr: "Bureau de protection des consommateurs — Banque centrale de Bahreïn"
+    use:
+      ar: "لتقديم شكوى على مؤسسة مالية مرخّصة من المصرف، بالهاتف أو بالنموذج الإلكتروني في موقعه."
+      en: "To complain about a financial institution licensed by the CBB, by phone or with the online form on its website."
+      fr: "Pour une réclamation contre un établissement financier agréé par la CBB, par téléphone ou avec le formulaire en ligne de son site."
+    source:
+      title: "Consumer Information"
+      publisher:
+        ar: "مصرف البحرين المركزي"
+        en: "Central Bank of Bahrain (CBB)"
+        fr: "Banque centrale de Bahreïn (CBB)"
+      url: "https://www.cbb.gov.bh/consumer-information/"
+      lang: en
+    lastVerified: 2026-11-07

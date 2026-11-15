@@ -1,0 +1,136 @@
+# Official reporting channels — Saudi Arabia.
+# Every channel needs an official source opened by the person who adds or
+# re-checks it. Re-verify every 3 months (scripts/reverify.mjs).
+country: sa
+order: 1
+name:
+  ar: "السعودية"
+  en: "Saudi Arabia"
+  fr: "Arabie saoudite"
+channels:
+  - id: moi-kollona-amn
+    type: app
+    contact:
+      ar: "كلنا أمن"
+      en: "Kollona Amn (كلنا أمن)"
+      fr: "Kollona Amn (كلنا أمن)"
+    name:
+      ar: "بلاغات الجرائم المعلوماتية — وزارة الداخلية"
+      en: "Cybercrime reports — Ministry of Interior"
+      fr: "Signalement de la cybercriminalité — ministère de l'Intérieur"
+    use:
+      ar: "للإبلاغ عن الجرائم عبر الإنترنت، ومنها الاحتيال المالي والابتزاز وسرقة الحسابات وانتحال الهوية. للمواطنين والمقيمين، ومجانية."
+      en: "Report online crimes, including financial fraud, blackmail, account theft and identity theft. For citizens and residents; free."
+      fr: "Pour signaler les crimes en ligne, dont la fraude financière, le chantage, le vol de compte et l'usurpation d'identité. Pour les citoyens et les résidents ; gratuit."
+    source:
+      title: "بلاغات الجرائم المعلوماتية"
+      publisher:
+        ar: "وزارة الداخلية، المنصة الوطنية (my.gov.sa)"
+        en: "Ministry of Interior, national platform (my.gov.sa)"
+        fr: "Ministère de l'Intérieur, plateforme nationale (my.gov.sa)"
+      url: "https://my.gov.sa/ar/services/398352"
+      lang: ar
+    lastVerified: 2026-11-07
+  - id: moi-absher-card-fraud
+    type: app
+    contact:
+      ar: "أبشر"
+      en: "Absher (أبشر)"
+      fr: "Absher (أبشر)"
+    name:
+      ar: "بلاغات الاحتيال المالي — وزارة الداخلية"
+      en: "Financial fraud reports — Ministry of Interior"
+      fr: "Signalement de fraude financière — ministère de l'Intérieur"
+    use:
+      ar: "للإبلاغ عن الاحتيال على البطاقات المصرفية. في أبشر اختر «خدماتي»، ثم «الأمن العام»، ثم «بلاغات الاحتيال المالي»."
+      en: "Report fraud on bank cards. In Absher, choose My Services, then Public Security, then Financial Fraud Reports."
+      fr: "Pour signaler une fraude sur une carte bancaire. Dans Absher, choisissez Mes services, puis Sécurité publique, puis Signalements de fraude financière."
+    source:
+      title: "بلاغات الاحتيال المالي"
+      publisher:
+        ar: "وزارة الداخلية، المنصة الوطنية (my.gov.sa)"
+        en: "Ministry of Interior, national platform (my.gov.sa)"
+        fr: "Ministère de l'Intérieur, plateforme nationale (my.gov.sa)"
+      url: "https://my.gov.sa/ar/services/538742"
+      lang: ar
+    lastVerified: 2026-11-07
+  - id: cst-330330
+    type: sms
+    contact: "330330"
+    name:
+      ar: "الإبلاغ عن الرسائل والمكالمات الاحتيالية — هيئة الاتصالات"
+      en: "Report scam texts and calls — CST"
+      fr: "Signaler les SMS et appels frauduleux — CST"
+    use:
+      ar: "أرسل رسالة نصية إلى هذا الرقم للإبلاغ عن رسالة أو مكالمة احتيالية."
+      en: "Send a text message to this number to report a scam message or call."
+      fr: "Envoyez un SMS à ce numéro pour signaler un message ou un appel frauduleux."
+    source:
+      title: "2 صد المتصيد"
+      publisher:
+        ar: "هيئة الاتصالات والفضاء والتقنية"
+        en: "Communications, Space and Technology Commission (CST)"
+        fr: "Commission des communications, de l'espace et de la technologie (CST)"
+      url: "https://www.cst.gov.sa/ar/knowledge-center/user-awareness/catch-the-phish-2"
+      lang: ar
+    lastVerified: 2026-11-07
+  - id: cst-filter
+    type: website
+    contact: "https://filter.cst.gov.sa"
+    name:
+      ar: "الإبلاغ عن الروابط المشبوهة — هيئة الاتصالات"
+      en: "Report suspicious links — CST"
+      fr: "Signaler les liens suspects — CST"
+    use:
+      ar: "أبلغ عن رابط أو موقع مشبوه وصلك."
+      en: "Report a suspicious link or website you received."
+      fr: "Signalez un lien ou un site suspect que vous avez reçu."
+    source:
+      title: "2 صد المتصيد"
+      publisher:
+        ar: "هيئة الاتصالات والفضاء والتقنية"
+        en: "Communications, Space and Technology Commission (CST)"
+        fr: "Commission des communications, de l'espace et de la technologie (CST)"
+      url: "https://www.cst.gov.sa/ar/knowledge-center/user-awareness/catch-the-phish-2"
+      lang: ar
+    lastVerified: 2026-11-07
+  - id: sama-complaints
+    type: website
+    contact: "https://complaints-consumer.sama.gov.sa"
+    name:
+      ar: "تقديم شكوى على المؤسسات المالية — البنك المركزي السعودي"
+      en: "Complaint against a financial institution — Saudi Central Bank"
+      fr: "Réclamation contre un établissement financier — Banque centrale saoudienne"
+    use:
+      ar: "قدّم شكوى على بنك أو شركة تمويل أو مدفوعات أو صرافة. تدخل عبر النفاذ الوطني الموحد، والخدمة مجانية."
+      en: "File a complaint against a bank, or a finance, payment or exchange company. You sign in with Nafath (national single sign-on); the service is free."
+      fr: "Déposez une réclamation contre une banque ou une société de financement, de paiement ou de change. Connexion par Nafath (identifiant national) ; service gratuit."
+    source:
+      title: "تفاصيل الخدمة — تقديم شكوى على المؤسسات المالية"
+      publisher:
+        ar: "البنك المركزي السعودي (ساما)"
+        en: "Saudi Central Bank (SAMA)"
+        fr: "Banque centrale saoudienne (SAMA)"
+      url: "https://www.sama.gov.sa/ar-sa/Pages/ServiceDetails.aspx?serviceid=121"
+      lang: ar
+    lastVerified: 2026-11-07
+  - id: sama-contact-center
+    type: phone
+    contact: "8001256666"
+    name:
+      ar: "مركز التواصل للشكاوى — البنك المركزي السعودي"
+      en: "Complaints contact centre — Saudi Central Bank"
+      fr: "Centre de contact pour les réclamations — Banque centrale saoudienne"
+    use:
+      ar: "رقم شكاوى العملاء، ويعمل على مدار الساعة طوال أيام الأسبوع."
+      en: "Customer complaints line, open 24 hours a day, every day."
+      fr: "Ligne des réclamations des clients, ouverte 24 heures sur 24, tous les jours."
+    source:
+      title: "اتصل بنا — الشكاوى"
+      publisher:
+        ar: "البنك المركزي السعودي (ساما)"
+        en: "Saudi Central Bank (SAMA)"
+        fr: "Banque centrale saoudienne (SAMA)"
+      url: "https://www.sama.gov.sa/ar-sa/PortalServices/Pages/contactus.aspx?displaycomplaints=true"
+      lang: ar
+    lastVerified: 2026-11-07

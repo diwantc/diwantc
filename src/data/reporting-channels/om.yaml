@@ -1,0 +1,50 @@
+# Official reporting channels — Oman.
+# Every channel needs an official source opened by the person who adds or
+# re-checks it. Re-verify every 3 months (scripts/reverify.mjs).
+country: om
+order: 6
+name:
+  ar: "عُمان"
+  en: "Oman"
+  fr: "Oman"
+channels:
+  - id: rop-80077444
+    type: phone
+    contact: "80077444"
+    name:
+      ar: "الخط الساخن للتحريات والبحث الجنائي — شرطة عُمان السلطانية"
+      en: "Criminal investigation hotline — Royal Oman Police"
+      fr: "Ligne directe d'enquêtes criminelles — police royale d'Oman"
+    use:
+      ar: "للإبلاغ عن الابتزاز والاحتيال الإلكتروني، من 7:30 صباحاً إلى 2:00 ظهراً."
+      en: "Report electronic blackmail and fraud, from 7:30 to 14:00."
+      fr: "Pour signaler le chantage et la fraude électroniques, de 7 h 30 à 14 h."
+    source:
+      title: "أرقام هواتف الشرطة"
+      publisher:
+        ar: "شرطة عُمان السلطانية"
+        en: "Royal Oman Police (ROP)"
+        fr: "Police royale d'Oman (ROP)"
+      url: "https://www.rop.gov.om/arabic/ropphones.aspx"
+      lang: ar
+    lastVerified: 2026-11-07
+  - id: rop-9999
+    type: phone
+    contact: "9999"
+    name:
+      ar: "مركز عمليات الشرطة (الطوارئ)"
+      en: "Police Operations Center (emergency)"
+      fr: "Centre des opérations de police (urgences)"
+    use:
+      ar: "رقم الطوارئ لدى شرطة عُمان السلطانية."
+      en: "The Royal Oman Police emergency number."
+      fr: "Le numéro d'urgence de la police royale d'Oman."
+    source:
+      title: "Contact us"
+      publisher:
+        ar: "شرطة عُمان السلطانية"
+        en: "Royal Oman Police (ROP)"
+        fr: "Police royale d'Oman (ROP)"
+      url: "https://www.rop.gov.om/english/contactus.aspx"
+      lang: en
+    lastVerified: 2026-11-07

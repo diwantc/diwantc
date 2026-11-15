@@ -1,0 +1,138 @@
+---
+// Official reporting channels per country, for lesson safety-l0-07. Usage in
+// MDX (no import needed; the lesson page provides it):
+//
+//   <ReportingChannels />
+//
+// Data: src/data/reporting-channels/<country>.yaml (schema in
+// src/content.config.ts). Without JavaScript every country is listed; with
+// JavaScript a country picker shows one country at a time.
+import { getCollection } from 'astro:content';
+import { formatDate, t } from '../i18n/ui';
+import { DEFAULT_LOCALE, isLocale, type ChannelType, type Locale } from '../lib/taxonomy';
+
+const lang: Locale = isLocale(Astro.currentLocale) ? Astro.currentLocale : DEFAULT_LOCALE;
+const countries = (await getCollection('reportingChannels')).sort((a, b) => a.data.order - b.data.order);
+const id = `reporting-${Math.random().toString(36).slice(2, 10)}`;
+
+/** A link that opens the right app for the channel, when there is one. */
+function contactHref(type: ChannelType, contact: string): string | undefined {
+  const digits = contact.replace(/[^\d+]/g, '');
+  if (type === 'sms') return `sms:${digits}`;
+  if (type === 'phone') return `tel:${digits}`;
+  if (type === 'website') return contact;
+  if (type === 'email') return `mailto:${contact}`;
+  return undefined;
+}
+---
+
+<div class="reporting" role="group" aria-label={t(lang, 'reporting.label')} data-reporting>
+  <div class="mb-4" data-reporting-picker hidden>
+    <label for={`${id}-country`} class="block font-semibold mb-1">{t(lang, 'reporting.country')}</label>
+    <select id={`${id}-country`} class="reporting-select" data-reporting-select>
+      {countries.map((country) => <option value={country.data.country}>{country.data.name[lang]}</option>)}
+    </select>
+  </div>
+
+  {
+    countries.map((country) => (
+      <section class="reporting-country" data-country={country.data.country} aria-labelledby={`${id}-${country.data.country}`}>
+        <h3 id={`${id}-${country.data.country}`}>{country.data.name[lang]}</h3>
+        <ul>
+          {country.data.channels.map((channel) => {
+            const contact = typeof channel.contact === 'string' ? channel.contact : channel.contact[lang];
+            const href = contactHref(channel.type, contact);
+            return (
+              <li class="reporting-channel">
+                <p class="font-semibold">{channel.name[lang]}</p>
+                <p>
+                  <span>{t(lang, 'reporting.typeLabel', { type: t(lang, `reporting.type.${channel.type}`) })} </span>
+                  {href ? (
+                    <a href={href} dir="ltr" class="reporting-contact">
+                      {contact}
+                    </a>
+                  ) : (
+                    <span dir="auto" class="reporting-contact">
+                      {contact}
+                    </span>
+                  )}
+                </p>
+                <p>{channel.use[lang]}</p>
+                <p class="text-sm text-muted">
+                  {t(lang, 'reporting.source')}{' '}
+                  <a href={channel.source.url} lang={channel.source.lang} rel="noopener">
+                    {channel.source.publisher[lang]}
+                  </a>
+                  {' · '}
+                  {t(lang, 'reporting.lastVerified', { date: formatDate(lang, channel.lastVerified) })}
+                </p>
+              </li>
+            );
+          })}
+        </ul>
+      </section>
+    ))
+  }
+</div>
+
+<script>
+  // Show one country at a time once JavaScript runs; without it, all are listed.
+  document.querySelectorAll<HTMLElement>('[data-reporting]').forEach((root) => {
+    const picker = root.querySelector<HTMLElement>('[data-reporting-picker]');
+    const select = root.querySelector<HTMLSelectElement>('[data-reporting-select]');
+    const sections = [...root.querySelectorAll<HTMLElement>('[data-country]')];
+    if (!picker || !select || sections.length === 0) return;
+    const show = () => sections.forEach((section) => (section.hidden = section.dataset.country !== select.value));
+    picker.hidden = false;
+    select.addEventListener('change', show);
+    show();
+  });
+</script>
+
+<style>
+  .reporting {
+    margin-block: 1.5em;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+    background: var(--surface);
+  }
+
+  .reporting-select {
+    min-block-size: 2.75rem; /* 44px touch target */
+    min-inline-size: 12rem;
+    padding-inline: 0.75rem;
+    border: 1px solid var(--muted); /* 3:1 boundary for an input (WCAG 1.4.11) */
+    border-radius: 0.5rem;
+    background: var(--bg);
+    color: var(--fg);
+  }
+
+  .reporting-country + .reporting-country {
+    margin-block-start: 1.5em;
+  }
+
+  .reporting-country h3 {
+    font-weight: 700;
+    font-size: 1.15em;
+    margin-block-end: 0.5em;
+  }
+
+  .reporting-country ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .reporting-channel {
+    padding-inline-start: 0.75rem;
+    border-inline-start: 3px solid var(--brand);
+  }
+
+  .reporting-contact {
+    unicode-bidi: isolate;
+    font-weight: 600;
+  }
+</style>

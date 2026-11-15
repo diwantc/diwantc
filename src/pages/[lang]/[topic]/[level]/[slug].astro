@@ -2,6 +2,7 @@
 import { render } from 'astro:content';
 import Base from '../../../../layouts/Base.astro';
 import CodeRunner from '../../../../components/CodeRunner.astro';
+import ReportingChannels from '../../../../components/ReportingChannels.astro';
 import { getLessons, lessonPath, lessonSlug, type Lesson } from '../../../../lib/lessons';
 import { formatDate, formatList, t, tPlural } from '../../../../i18n/ui';
 import type { Level } from '../../../../lib/taxonomy';
@@ -92,7 +93,7 @@ const isApproved = data.review.status === 'approved';
 
     <div class="lesson">
       {/* Components lessons may use without an import. */}
-      <Content components={{ CodeRunner }} />
+      <Content components={{ CodeRunner, ReportingChannels }} />
     </div>
 
     <footer class="mt-12 border-t border-border pt-6 text-muted">

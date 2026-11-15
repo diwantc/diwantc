@@ -1,0 +1,50 @@
+# Official reporting channels — Kuwait.
+# Every channel needs an official source opened by the person who adds or
+# re-checks it. Re-verify every 3 months (scripts/reverify.mjs).
+country: kw
+order: 3
+name:
+  ar: "الكويت"
+  en: "Kuwait"
+  fr: "Koweït"
+channels:
+  - id: moi-cybercrime
+    type: phone
+    contact: "+965 97283939"
+    name:
+      ar: "إدارة مكافحة الجرائم الإلكترونية — وزارة الداخلية"
+      en: "Cybercrime Combating Department — Ministry of Interior"
+      fr: "Département de lutte contre la cybercriminalité — ministère de l'Intérieur"
+    use:
+      ar: "للإبلاغ عن الجرائم الإلكترونية، بالاتصال أو عبر واتساب على الرقم نفسه. يُتعامل مع البلاغ بسرية تامة."
+      en: "Report cybercrime by calling, or on WhatsApp at the same number. Reports are handled in full confidentiality."
+      fr: "Pour signaler un cybercrime, par appel ou sur WhatsApp au même numéro. Les signalements sont traités en toute confidentialité."
+    source:
+      title: "Cyber Crime"
+      publisher:
+        ar: "وزارة الداخلية الكويتية"
+        en: "Ministry of Interior, Kuwait"
+        fr: "Ministère de l'Intérieur, Koweït"
+      url: "https://www.moi.gov.kw/main/sections/cyber-crime"
+      lang: ar
+    lastVerified: 2026-11-07
+  - id: cbk-complaints
+    type: website
+    contact: "https://services.cbk.gov.kw/apps/r/ebsprod/cbkcpp/home"
+    name:
+      ar: "بوابة حماية العملاء — بنك الكويت المركزي"
+      en: "Consumers' Protection portal — Central Bank of Kuwait"
+      fr: "Portail de protection des consommateurs — Banque centrale du Koweït"
+    use:
+      ar: "اشتكِ إلى بنكك أولاً. إذا لم يعطك نموذج الشكوى، أو لم يرد كتابياً خلال 5 أيام عمل، فقدّم شكواك هنا."
+      en: "Complain to your bank first. If it does not give you its complaint form, or does not reply in writing within 5 working days, complain here."
+      fr: "Adressez d'abord votre réclamation à votre banque. Si elle ne vous donne pas son formulaire, ou ne répond pas par écrit sous 5 jours ouvrés, déposez votre réclamation ici."
+    source:
+      title: "Consumers' Complaints Against Banks"
+      publisher:
+        ar: "بنك الكويت المركزي"
+        en: "Central Bank of Kuwait (CBK)"
+        fr: "Banque centrale du Koweït (CBK)"
+      url: "https://www.cbk.gov.kw/en/supervision/customer-protection/complaints/consumers-complaints-against-banks"
+      lang: en
+    lastVerified: 2026-11-07

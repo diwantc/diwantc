@@ -1,0 +1,16 @@
+# Test fixture: one channel last verified long ago, so reverify.mjs lists it.
+country: xx
+order: 1
+name: { ar: "بلد تجريبي", en: "Test country", fr: "Pays de test" }
+channels:
+  - id: old-hotline
+    type: phone
+    contact: "123456"
+    name: { ar: "خط قديم", en: "Old line", fr: "Ancienne ligne" }
+    use: { ar: "للاختبار فقط.", en: "Test only.", fr: "Test uniquement." }
+    source:
+      title: "Example Domain"
+      publisher: { ar: "IANA", en: "IANA", fr: "IANA" }
+      url: https://example.com/
+      lang: en
+    lastVerified: 2020-01-01
