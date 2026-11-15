@@ -13,9 +13,11 @@ interface Props {
   lang: Locale;
   title?: string;
   description?: string;
+  /** Keep this page out of search results (forms, utility pages). */
+  noindex?: boolean;
 }
 
-const { lang, title, description } = Astro.props;
+const { lang, title, description, noindex = false } = Astro.props;
 const siteName = t(lang, 'site.name');
 const pageTitle = title ? `${title} · ${siteName}` : siteName;
 const pageDescription = description ?? t(lang, 'site.tagline');
@@ -34,6 +36,7 @@ const canonical = new URL(pathFor(lang), Astro.site);
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{pageTitle}</title>
     <meta name="description" content={pageDescription} />
+    {noindex && <meta name="robots" content="noindex" />}
     <link rel="canonical" href={canonical} />
     {
       LOCALES.map((locale) => (
