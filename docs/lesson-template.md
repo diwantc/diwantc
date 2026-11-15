@@ -1,7 +1,7 @@
 # Lesson Template — DiwanTC (draft)
 
 **Status:** all decisions made 2026-11-06; no open items
-**Last updated:** 2026-11-06
+**Last updated:** 2026-11-07
 **Related:** [`topic-map.md`](topic-map.md)
 
 Every lesson, in every language, follows this template. Claude drafts to it,
@@ -166,6 +166,47 @@ The reviewer's real name and the team name always appear together
 Answers use `<details>` so they work without JavaScript and with screen
 readers. An interactive quiz component can replace it later without
 changing the content.
+
+### Running code in a lesson (`<CodeRunner>`)
+
+Programming lessons can let the learner run and change a program on the
+page. `<CodeRunner>` is available in every lesson without an import:
+
+```mdx
+<CodeRunner
+  title="مثال 1: أول برنامج"
+  code={`
+    let name = "سارة";
+    console.log("مرحباً يا " + name + "!");
+  `}
+/>
+```
+
+- `code` (required): the starting program, in a template literal. The blank
+  first and last lines and the shared indentation are removed. Write a
+  backtick as `` \` `` and `${` as `\${`.
+- `title` (optional): a visible caption in the lesson's language.
+- `language`: `js`, the default and the only one for now. A later Python
+  track adds `python`, whose runtime loads only on Python lessons.
+- The learner can edit, run (button, or Ctrl+Enter / ⌘+Enter), stop, and
+  restore the original code. Nothing is saved.
+- The output panel is always left-to-right and shows `console.log`,
+  `console.warn` and `console.error` lines. A status line in the lesson's
+  language says how the run ended. Errors show the browser's message, the
+  line number, and one plain sentence for `SyntaxError`, `ReferenceError`,
+  `TypeError` and `RangeError`.
+- A run stops after 5 seconds or 500 printed lines.
+- Arabic in the editor: the editor is a plain left-to-right text box. A
+  number written right after an Arabic string on the same line is drawn
+  inside the string (in `console.log("العدد:", 5)` the 5 appears next to the
+  Arabic word). This comes from the Unicode bidirectional algorithm, not
+  from the runner. In lesson code, put the number in a variable first:
+  `let count = 5;` then `console.log("العدد:", count);`. The output panel
+  shows Arabic correctly either way.
+- The code runs in a sandbox with no access to the page, cookies, storage
+  or the network. `document`, `alert`, `prompt` and `fetch` do not work:
+  teach with `console.log`.
+- To see it: `npm run dev:demo`, then `/ar/programming/0/runner-demo/`.
 
 ## 5. Writing rules
 

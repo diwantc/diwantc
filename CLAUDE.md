@@ -17,6 +17,7 @@ src/content/lessons/<lang>/<topic>/l<level>/<nn>-<slug>.mdx   lessons (CC BY-SA 
 src/content.config.ts    lesson schema (Zod, from astro/zod)
 src/lib/taxonomy.ts      languages, topics, levels, platforms
 src/i18n/ui.ts           all interface text, as keys, in ar/en/fr
+src/components/          CodeRunner (in-page code runner, see lesson-template.md)
 src/pages/[lang]/…       home, topic and lesson pages
 scripts/                 check-content, check-links, reverify
 tests/                   checker tests and demo lesson fixtures

@@ -16,6 +16,7 @@
   --brand-soft: #e6f2f5;
   --warn-bg: #fff4d6;
   --warn-fg: #5c4300;
+  --error-fg: #a4262c;
   color-scheme: light dark;
 }
 
@@ -31,6 +32,7 @@
     --brand-soft: #13303a;
     --warn-bg: #3a2e05;
     --warn-fg: #f5dc8f;
+    --error-fg: #ff9b94;
   }
 }
 
@@ -45,6 +47,7 @@
   --color-brand-soft: var(--brand-soft);
   --color-warn-bg: var(--warn-bg);
   --color-warn-fg: var(--warn-fg);
+  --color-error-fg: var(--error-fg);
   --font-sans: 'IBM Plex Sans Arabic', 'IBM Plex Sans', ui-sans-serif, system-ui, sans-serif;
 }
 
